@@ -31,6 +31,7 @@ export class LineChartComponent implements OnInit {
 	data: any[] = data.points;
 	isPlaying = true;
 	posters = data.poster;
+	starttime = data.starttime;
 
     private margin  = {top: 10, right: 20, bottom: 10, left: 0};
     private width: number;
@@ -193,8 +194,8 @@ export class LineChartComponent implements OnInit {
 
 
     private drawLineAndPath() {
-
-		const minMax = d3Array.extent(this.data, (d: any) => { return moment('Wed Apr 01 2020 15:30:00 GMT-0500', 'hh:mm:ss A')
+		
+		const minMax = d3Array.extent(this.data, (d: any) => { return moment(this.starttime, 'hh:mm:ss A')
 		.add(d.time * 5, 'minutes'); });
 
   		this.x.domain(minMax);
