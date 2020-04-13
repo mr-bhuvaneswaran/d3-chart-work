@@ -32,6 +32,7 @@ export class LineChartComponent implements OnInit {
 	isPlaying = true;
 	posters = data.poster;
 	starttime = data.starttime;
+	selectedBrush; 
 
     private margin  = {top: 10, right: 20, bottom: 10, left: 0};
     private width: number;
@@ -49,6 +50,7 @@ export class LineChartComponent implements OnInit {
 
 	private context: any;
 	private brush: any;
+	private brush1: any;
 	private zoom: any;
 	private area2: d3Shape.Area<[number, number]>;
 	private focus: any;
@@ -121,6 +123,10 @@ export class LineChartComponent implements OnInit {
 		// Configure the Y Axis
 		this.yAxis = d3Axis.axisLeft(this.y);
 
+		this.brush1 = d3Brush.brushX()
+		.extent([[0, 0], [this.width, this.height]])
+		.on('brush end', null);
+
 		this.brush = d3Brush.brushX()
 			.extent([[0, 0], [this.width, this.height]])
 			.on('brush end', this.brushed.bind(this));
@@ -173,7 +179,8 @@ export class LineChartComponent implements OnInit {
 
   	private brushed() {
 	    if (d3.event.sourceEvent && d3.event.sourceEvent.type === 'zoom') { return; } // ignore brush-by-zoom
-	    const s = d3.event.selection || this.x2.range();
+		const s = d3.event.selection || this.x2.range();
+		this.selectedBrush = s;
 	    this.x.domain(s.map(this.x2.invert, this.x2));
 	    this.focus.select('.area').attr('d', this.area);
 	    this.focus.select('.axis--x').call(this.xAxis);
@@ -219,9 +226,9 @@ export class LineChartComponent implements OnInit {
 			.call(this.xAxis);
 
 		this.focus.append('g')
-			.attr('class', 'brush')
-			.call(this.brush)
-			.call(this.brush.move, this.x.range())
+			.attr('class', 'brush1')
+			.call(this.brush1)
+			.call(this.brush1.move, this.x.range())
 			.selectAll('.handle').style('pointer-events', 'none');
 
 		this.context.append('path')
@@ -240,8 +247,9 @@ export class LineChartComponent implements OnInit {
 
 		this.context.append('g')
 			.attr('class', 'brush')
+			.attr('id', 'brush')
 			.call(this.brush)
-			.call(this.brush.move, [0, 34])
+			.call(this.brush.move, [50, 84])
 			.selectAll('.brush>.handle').remove()
 			.selectAll('.brush>.overlay').remove();
 
@@ -268,6 +276,16 @@ export class LineChartComponent implements OnInit {
 		
 	}	
 
+
+	private autoBrush() {
+		const s = this.selectedBrush;
+	    this.x.domain(s.map(this.x2.invert, this.x2));
+	    this.focus.select('.area').attr('d', this.area);
+	    this.focus.select('.axis--x').call(this.xAxis);
+	    this.svg.select('.zoom').call(this.zoom.transform, d3Zoom.zoomIdentity
+	        .scale(this.width / (s[1] - s[0]))
+	        .translate(-s[0], 0));
+	}
 
 	// This method tick the data flow in the chart. It uses 250ms duration to move the chart.
 	private tick() {
@@ -302,6 +320,12 @@ export class LineChartComponent implements OnInit {
 		  .duration(duration)
 		  .ease(D3.easeLinear)
 		  .call(this.xAxis2);
+
+		//   this.focus.select('.axis.axis--x')
+		//   .transition()
+		//   .duration(duration)
+		//   .ease(D3.easeLinear)
+		//   .call(this.xAxis);
 	
 		// Update y axis
 		this.context.select('.axis.axis--y')
@@ -320,6 +344,7 @@ export class LineChartComponent implements OnInit {
 		if (!this.isPlaying) {
 			return;
 		}
+		this.autoBrush();
 		this.tick();
 		});
 	
