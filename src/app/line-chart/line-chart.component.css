@@ -1,0 +1,40 @@
+/* .line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 2px;
+} */
+
+.area {
+  fill: lightsteelblue;
+}
+
+
+svg {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.line {
+  fill: powderblue;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+.brush .extent {
+  fill-opacity: .125;
+  shape-rendering: crispEdges;
+}
+
+g.brush>.resize {
+  display: none;
+}
+
+.handle {
+  pointer-events: none;
+}

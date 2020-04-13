@@ -1,0 +1,37 @@
+<div class="chart-controls">
+  <select  class='form-control' 
+          (change)="onChangeObj($event)" [value]='selected' >
+    <option *ngFor="let poster of posters; let index = index" [value]='index'>{{poster}}</option>
+  </select>
+
+  <select  class='form-control' 
+          (change)="onTimeObj($event)" [value]='selectedTime' style="margin-left: 20px">
+    <option value='10'>10 Minutes</option>
+    <option value='30'>30 Minutes</option>
+    <option value='60'>60 Minutes</option>
+  </select>
+</div>
+
+<div class="svg1-con">
+  <svg class="svg1" width="960" height="300"></svg>  
+</div>
+
+  <button (click)="onPlayPause($event)" style="margin-bottom: 16px;">{{ isPlaying ? 'Pause' : 'Play'}}</button>
+
+<div class="chart-controls">
+  <select  class='form-control' 
+          (change)="onChangeObj($event)" [value]='selected' >
+    <option *ngFor="let poster of posters; let index = index" [value]='index'>{{poster}}</option>
+  </select>
+
+  <select  class='form-control' 
+          (change)="onTimeObj($event)" [value]='selectedTime' style="margin-left: 20px">
+    <option value='10'>10 Minutes</option>
+    <option value='30'>30 Minutes</option>
+    <option value='60'>60 Minutes</option>
+  </select>
+</div>
+
+<div class="svg-con">
+  <svg class="svg" width="960" height="300"></svg>  
+</div>
