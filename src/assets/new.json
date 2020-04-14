@@ -1,493 +1,432 @@
 {
-    "starttime":" Wed Apr 01 2020 15:30:00 GMT-0500 (Eastern Daylight Time)",
-    "endtime": "Wed Apr 01 2020 16:30:00 GMT-0500 (Eastern Daylight Time)",
-    "poster": [
-        "Normal",
-        "Medium",
-        "Hard"
+    "starttime": "Wed Apr 01 2020 19:42:06 GMT-0400 (Eastern Daylight Time)",
+    "endtime": "Wed Apr 01 2020 20:42:06 GMT-0400 (Eastern Daylight Time)",
+    "labels": [
+        "Hard",
+        "Easy"
     ],
-    "points": [
+    "datapoints": [
         {
-            "Array": [
+            "dataArray": [
                 0,
-                21,
-                120
+                0
             ],
             "time": 0
         },
         {
-            "Array": [
+            "dataArray": [
                 0,
-                21,
-                120
+                0
             ],
             "time": 1
         },
         {
-            "Array": [
+            "dataArray": [
                 0,
-                21,
-                120
+                0
             ],
             "time": 2
         },
         {
-            "Array": [
+            "dataArray": [
                 0,
-                21,
-                120
+                0
             ],
             "time": 3
         },
         {
-            "Array": [
+            "dataArray": [
                 0,
-                21,
-                120
+                0
             ],
             "time": 4
         },
         {
-            "Array": [
+            "dataArray": [
                 0,
-                21,
-                120
+                0
             ],
             "time": 5
         },
         {
-            "Array": [
+            "dataArray": [
                 0,
-                21,
-                120
+                0
             ],
             "time": 6
         },
         {
-            "Array": [
+            "dataArray": [
                 0,
-                21,
-                120
+                0
             ],
             "time": 7
         },
         {
-            "Array": [
+            "dataArray": [
                 0,
-                21,
-                120
+                0
             ],
             "time": 8
         },
         {
-            "Array": [
+            "dataArray": [
                 0,
-                21,
-                120
+                0
             ],
             "time": 9
         },
         {
-            "Array": [
+            "dataArray": [
                 0,
-                21,
-                120
+                0
             ],
             "time": 10
         },
         {
-            "Array": [
+            "dataArray": [
                 0,
-                21,
-                120
+                0
             ],
             "time": 11
         },
         {
-            "Array": [
+            "dataArray": [
                 0,
-                21,
-                120
+                0
             ],
             "time": 12
         },
         {
-            "Array": [
+            "dataArray": [
                 0,
-                21,
-                120
+                0
             ],
             "time": 13
         },
         {
-            "Array": [
+            "dataArray": [
                 0,
-                21,
-                120
+                0
             ],
             "time": 14
         },
         {
-            "Array": [
+            "dataArray": [
                 0,
-                21,
-                120
+                0
             ],
             "time": 15
         },
         {
-            "Array": [
+            "dataArray": [
                 0,
-                21,
-                120
+                0
             ],
             "time": 16
         },
         {
-            "Array": [
+            "dataArray": [
                 0,
-                21,
-                120
+                0
             ],
             "time": 17
         },
         {
-            "Array": [
+            "dataArray": [
                 0,
-                21,
-                120
+                0
             ],
             "time": 18
         },
         {
-            "Array": [
+            "dataArray": [
                 0,
-                21,
-                120
+                0
             ],
             "time": 19
         },
         {
-            "Array": [
+            "dataArray": [
                 0,
-                21,
-                120
+                0
             ],
             "time": 20
         },
         {
-            "Array": [
+            "dataArray": [
                 0,
-                21,
-                120
+                0
             ],
             "time": 21
         },
         {
-            "Array": [
+            "dataArray": [
                 0,
-                21,
-                120
+                0
             ],
             "time": 22
         },
         {
-            "Array": [
+            "dataArray": [
                 0,
-                21,
-                120
+                0
             ],
             "time": 23
         },
         {
-            "Array": [
+            "dataArray": [
                 0,
-                21,
-                120
+                0
             ],
             "time": 24
         },
         {
-            "Array": [
+            "dataArray": [
                 0,
-                21,
-                120
+                0
             ],
             "time": 25
         },
         {
-            "Array": [
+            "dataArray": [
                 0,
-                21,
-                120
+                0
             ],
             "time": 26
         },
         {
-            "Array": [
+            "dataArray": [
                 0,
-                21,
-                120
+                0
             ],
             "time": 27
         },
         {
-            "Array": [
+            "dataArray": [
                 0,
-                21,
-                120
+                0
             ],
             "time": 28
         },
         {
-            "Array": [
+            "dataArray": [
                 0,
-                21,
-                120
+                0
             ],
             "time": 29
         },
         {
-            "Array": [
-                0,
-                21,
-                120
+            "dataArray": [
+                20,
+                0
             ],
             "time": 30
         },
         {
-            "Array": [
-                0,
+            "dataArray": [
                 21,
-                120
+                0
             ],
             "time": 31
         },
         {
-            "Array": [
-                0,
+            "dataArray": [
                 21,
-                120
+                0
             ],
             "time": 32
         },
         {
-            "Array": [
-                0,
+            "dataArray": [
                 21,
-                120
+                0
             ],
             "time": 33
         },
         {
-            "Array": [
-                0,
+            "dataArray": [
                 21,
-                120
+                0
             ],
             "time": 34
         },
         {
-            "Array": [
-                0,
+            "dataArray": [
                 21,
-                120
+                0
             ],
             "time": 35
         },
         {
-            "Array": [
-                0,
+            "dataArray": [
                 21,
-                120
+                0
             ],
             "time": 36
         },
         {
-            "Array": [
-                0,
+            "dataArray": [
                 21,
-                120
+                0
             ],
             "time": 37
         },
         {
-            "Array": [
-                0,
+            "dataArray": [
                 21,
-                120
+                0
             ],
             "time": 38
         },
         {
-            "Array": [
-                0,
+            "dataArray": [
                 21,
-                120
+                0
             ],
             "time": 39
         },
         {
-            "Array": [
-                0,
+            "dataArray": [
                 21,
-                120
+                0
             ],
             "time": 40
         },
         {
-            "Array": [
-                0,
+            "dataArray": [
                 21,
-                120
+                0
             ],
             "time": 41
         },
         {
-            "Array": [
-                0,
+            "dataArray": [
                 21,
-                120
+                0
             ],
             "time": 42
         },
         {
-            "Array": [
-                0,
+            "dataArray": [
                 21,
-                120
+                0
             ],
             "time": 43
         },
         {
-            "Array": [
-                0,
+            "dataArray": [
                 21,
-                120
+                0
             ],
             "time": 44
         },
         {
-            "Array": [
-                0,
+            "dataArray": [
                 21,
-                120
+                0
             ],
             "time": 45
         },
         {
-            "Array": [
-                0,
+            "dataArray": [
                 21,
-                120
+                0
             ],
             "time": 46
         },
         {
-            "Array": [
-                0,
+            "dataArray": [
                 21,
-                120
+                0
             ],
             "time": 47
         },
         {
-            "Array": [
-                0,
+            "dataArray": [
                 21,
-                120
+                0
             ],
             "time": 48
         },
         {
-            "Array": [
-                0,
+            "dataArray": [
                 21,
-                120
+                0
             ],
             "time": 49
         },
         {
-            "Array": [
-                0,
-                28,
-                180
+            "dataArray": [
+                21,
+                0
             ],
             "time": 50
         },
         {
-            "Array": [
-                0,
-                124,
-                1044
+            "dataArray": [
+                21,
+                0
             ],
             "time": 51
         },
         {
-            "Array": [
-                0,
-                24,
-                120
+            "dataArray": [
+                21,
+                0
             ],
             "time": 52
         },
         {
-            "Array": [
-                0,
+            "dataArray": [
                 21,
-                120
+                0
             ],
             "time": 53
         },
         {
-            "Array": [
-                0,
+            "dataArray": [
                 21,
-                120
+                0
             ],
             "time": 54
         },
         {
-            "Array": [
-                0,
+            "dataArray": [
                 21,
-                120
+                0
             ],
             "time": 55
         },
         {
-            "Array": [
-                0,
+            "dataArray": [
                 21,
-                120
+                0
             ],
             "time": 56
         },
         {
-            "Array": [
-                0,
+            "dataArray": [
                 21,
-                120
+                0
             ],
             "time": 57
         },
         {
-            "Array": [
-                0,
-                21,
-                120
+            "dataArray": [
+                36,
+                0
             ],
             "time": 58
         },
         {
-            "Array": [
-                0,
-                21,
-                120
+            "dataArray": [
+                84,
+                0
             ],
             "time": 59
         }
     ],
-    "brushstarttime": "Wed Apr 01 2020 16:25:00 GMT-0500 (Eastern Daylight Time)",
-    "brushendtime": "Wed Apr 01 2020 16:30:00 GMT-0500 (Eastern Daylight Time)"
+    "obsWindowStart":"Wed Apr 01 2020 20:37:06 GMT-0400 (Eastern Daylight Time)",
+    "obsWindowEnd":"Wed Apr 01 2020 20:42:06 GMT-0400 (Eastern Daylight Time)"
 }
