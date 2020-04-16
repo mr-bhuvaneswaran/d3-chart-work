@@ -1,0 +1,432 @@
+{
+    "starttime": "Wed Apr 01 2020 19:42:06 GMT-0400 (Eastern Daylight Time)",
+    "endtime": "Wed Apr 01 2020 20:42:06 GMT-0400 (Eastern Daylight Time)",
+    "labels": [
+        "Hard",
+        "Easy"
+    ],
+    "datapoints": [
+        {
+            "dataArray": [
+                0,
+                0
+            ],
+            "time": 0
+        },
+        {
+            "dataArray": [
+                0,
+                0
+            ],
+            "time": 1
+        },
+        {
+            "dataArray": [
+                0,
+                0
+            ],
+            "time": 2
+        },
+        {
+            "dataArray": [
+                0,
+                0
+            ],
+            "time": 3
+        },
+        {
+            "dataArray": [
+                0,
+                0
+            ],
+            "time": 4
+        },
+        {
+            "dataArray": [
+                0,
+                0
+            ],
+            "time": 5
+        },
+        {
+            "dataArray": [
+                0,
+                0
+            ],
+            "time": 6
+        },
+        {
+            "dataArray": [
+                0,
+                0
+            ],
+            "time": 7
+        },
+        {
+            "dataArray": [
+                0,
+                0
+            ],
+            "time": 8
+        },
+        {
+            "dataArray": [
+                0,
+                0
+            ],
+            "time": 9
+        },
+        {
+            "dataArray": [
+                0,
+                0
+            ],
+            "time": 10
+        },
+        {
+            "dataArray": [
+                0,
+                0
+            ],
+            "time": 11
+        },
+        {
+            "dataArray": [
+                0,
+                0
+            ],
+            "time": 12
+        },
+        {
+            "dataArray": [
+                0,
+                0
+            ],
+            "time": 13
+        },
+        {
+            "dataArray": [
+                0,
+                0
+            ],
+            "time": 14
+        },
+        {
+            "dataArray": [
+                0,
+                0
+            ],
+            "time": 15
+        },
+        {
+            "dataArray": [
+                0,
+                0
+            ],
+            "time": 16
+        },
+        {
+            "dataArray": [
+                0,
+                0
+            ],
+            "time": 17
+        },
+        {
+            "dataArray": [
+                0,
+                0
+            ],
+            "time": 18
+        },
+        {
+            "dataArray": [
+                0,
+                0
+            ],
+            "time": 19
+        },
+        {
+            "dataArray": [
+                0,
+                0
+            ],
+            "time": 20
+        },
+        {
+            "dataArray": [
+                0,
+                0
+            ],
+            "time": 21
+        },
+        {
+            "dataArray": [
+                0,
+                0
+            ],
+            "time": 22
+        },
+        {
+            "dataArray": [
+                0,
+                0
+            ],
+            "time": 23
+        },
+        {
+            "dataArray": [
+                0,
+                0
+            ],
+            "time": 24
+        },
+        {
+            "dataArray": [
+                0,
+                0
+            ],
+            "time": 25
+        },
+        {
+            "dataArray": [
+                0,
+                0
+            ],
+            "time": 26
+        },
+        {
+            "dataArray": [
+                0,
+                0
+            ],
+            "time": 27
+        },
+        {
+            "dataArray": [
+                0,
+                0
+            ],
+            "time": 28
+        },
+        {
+            "dataArray": [
+                0,
+                0
+            ],
+            "time": 29
+        },
+        {
+            "dataArray": [
+                20,
+                0
+            ],
+            "time": 30
+        },
+        {
+            "dataArray": [
+                21,
+                0
+            ],
+            "time": 31
+        },
+        {
+            "dataArray": [
+                21,
+                0
+            ],
+            "time": 32
+        },
+        {
+            "dataArray": [
+                21,
+                0
+            ],
+            "time": 33
+        },
+        {
+            "dataArray": [
+                21,
+                0
+            ],
+            "time": 34
+        },
+        {
+            "dataArray": [
+                21,
+                0
+            ],
+            "time": 35
+        },
+        {
+            "dataArray": [
+                21,
+                0
+            ],
+            "time": 36
+        },
+        {
+            "dataArray": [
+                21,
+                0
+            ],
+            "time": 37
+        },
+        {
+            "dataArray": [
+                21,
+                0
+            ],
+            "time": 38
+        },
+        {
+            "dataArray": [
+                21,
+                0
+            ],
+            "time": 39
+        },
+        {
+            "dataArray": [
+                21,
+                0
+            ],
+            "time": 40
+        },
+        {
+            "dataArray": [
+                21,
+                0
+            ],
+            "time": 41
+        },
+        {
+            "dataArray": [
+                21,
+                0
+            ],
+            "time": 42
+        },
+        {
+            "dataArray": [
+                21,
+                0
+            ],
+            "time": 43
+        },
+        {
+            "dataArray": [
+                21,
+                0
+            ],
+            "time": 44
+        },
+        {
+            "dataArray": [
+                21,
+                0
+            ],
+            "time": 45
+        },
+        {
+            "dataArray": [
+                21,
+                0
+            ],
+            "time": 46
+        },
+        {
+            "dataArray": [
+                21,
+                0
+            ],
+            "time": 47
+        },
+        {
+            "dataArray": [
+                21,
+                0
+            ],
+            "time": 48
+        },
+        {
+            "dataArray": [
+                21,
+                0
+            ],
+            "time": 49
+        },
+        {
+            "dataArray": [
+                21,
+                0
+            ],
+            "time": 50
+        },
+        {
+            "dataArray": [
+                21,
+                0
+            ],
+            "time": 51
+        },
+        {
+            "dataArray": [
+                21,
+                0
+            ],
+            "time": 52
+        },
+        {
+            "dataArray": [
+                21,
+                0
+            ],
+            "time": 53
+        },
+        {
+            "dataArray": [
+                21,
+                0
+            ],
+            "time": 54
+        },
+        {
+            "dataArray": [
+                21,
+                0
+            ],
+            "time": 55
+        },
+        {
+            "dataArray": [
+                21,
+                0
+            ],
+            "time": 56
+        },
+        {
+            "dataArray": [
+                21,
+                0
+            ],
+            "time": 57
+        },
+        {
+            "dataArray": [
+                36,
+                0
+            ],
+            "time": 58
+        },
+        {
+            "dataArray": [
+                84,
+                0
+            ],
+            "time": 59
+        }
+    ],
+    "obsWindowStart":"Wed Apr 01 2020 20:37:06 GMT-0400 (Eastern Daylight Time)",
+    "obsWindowEnd":"Wed Apr 01 2020 20:42:06 GMT-0400 (Eastern Daylight Time)"
+}

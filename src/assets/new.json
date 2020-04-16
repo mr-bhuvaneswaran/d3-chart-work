@@ -1,432 +1,504 @@
 {
-    "starttime": "Wed Apr 01 2020 19:42:06 GMT-0400 (Eastern Daylight Time)",
-    "endtime": "Wed Apr 01 2020 20:42:06 GMT-0400 (Eastern Daylight Time)",
     "labels": [
-        "Hard",
-        "Easy"
+        "Connections",
+        "UsedSkills"
     ],
-    "datapoints": [
+    "dataPoints": [
         {
             "dataArray": [
                 0,
                 0
             ],
-            "time": 0
+            "index": 0,
+            "time": "2020-04-15T21:34:11.751Z"
         },
         {
             "dataArray": [
                 0,
                 0
             ],
-            "time": 1
+            "index": 1,
+            "time": "2020-04-15T21:35:11.751Z"
         },
         {
             "dataArray": [
                 0,
                 0
             ],
-            "time": 2
+            "index": 2,
+            "time": "2020-04-15T21:36:11.751Z"
         },
         {
             "dataArray": [
                 0,
                 0
             ],
-            "time": 3
+            "index": 3,
+            "time": "2020-04-15T21:37:11.751Z"
         },
         {
             "dataArray": [
                 0,
                 0
             ],
-            "time": 4
+            "index": 4,
+            "time": "2020-04-15T21:38:11.751Z"
         },
         {
             "dataArray": [
                 0,
                 0
             ],
-            "time": 5
+            "index": 5,
+            "time": "2020-04-15T21:39:11.751Z"
         },
         {
             "dataArray": [
                 0,
                 0
             ],
-            "time": 6
+            "index": 6,
+            "time": "2020-04-15T21:40:11.751Z"
         },
         {
             "dataArray": [
                 0,
                 0
             ],
-            "time": 7
+            "index": 7,
+            "time": "2020-04-15T21:41:11.751Z"
         },
         {
             "dataArray": [
                 0,
                 0
             ],
-            "time": 8
+            "index": 8,
+            "time": "2020-04-15T21:42:11.751Z"
         },
         {
             "dataArray": [
                 0,
                 0
             ],
-            "time": 9
+            "index": 9,
+            "time": "2020-04-15T21:43:11.751Z"
         },
         {
             "dataArray": [
                 0,
                 0
             ],
-            "time": 10
+            "index": 10,
+            "time": "2020-04-15T21:44:11.751Z"
         },
         {
             "dataArray": [
                 0,
                 0
             ],
-            "time": 11
+            "index": 11,
+            "time": "2020-04-15T21:45:11.751Z"
         },
         {
             "dataArray": [
                 0,
                 0
             ],
-            "time": 12
-        },
-        {
-            "dataArray": [
-                0,
-                0
-            ],
-            "time": 13
-        },
-        {
-            "dataArray": [
-                0,
-                0
-            ],
-            "time": 14
-        },
-        {
-            "dataArray": [
-                0,
-                0
-            ],
-            "time": 15
-        },
-        {
-            "dataArray": [
-                0,
-                0
-            ],
-            "time": 16
-        },
-        {
-            "dataArray": [
-                0,
-                0
-            ],
-            "time": 17
-        },
-        {
-            "dataArray": [
-                0,
-                0
-            ],
-            "time": 18
-        },
-        {
-            "dataArray": [
-                0,
-                0
-            ],
-            "time": 19
-        },
-        {
-            "dataArray": [
-                0,
-                0
-            ],
-            "time": 20
-        },
-        {
-            "dataArray": [
-                0,
-                0
-            ],
-            "time": 21
-        },
-        {
-            "dataArray": [
-                0,
-                0
-            ],
-            "time": 22
-        },
-        {
-            "dataArray": [
-                0,
-                0
-            ],
-            "time": 23
-        },
-        {
-            "dataArray": [
-                0,
-                0
-            ],
-            "time": 24
-        },
-        {
-            "dataArray": [
-                0,
-                0
-            ],
-            "time": 25
-        },
-        {
-            "dataArray": [
-                0,
-                0
-            ],
-            "time": 26
-        },
-        {
-            "dataArray": [
-                0,
-                0
-            ],
-            "time": 27
-        },
-        {
-            "dataArray": [
-                0,
-                0
-            ],
-            "time": 28
-        },
-        {
-            "dataArray": [
-                0,
-                0
-            ],
-            "time": 29
+            "index": 12,
+            "time": "2020-04-15T21:46:11.751Z"
         },
         {
             "dataArray": [
                 20,
-                0
+                9759
             ],
-            "time": 30
+            "index": 13,
+            "time": "2020-04-15T21:47:11.751Z"
         },
         {
             "dataArray": [
                 21,
-                0
+                9759
             ],
-            "time": 31
+            "index": 14,
+            "time": "2020-04-15T21:48:11.751Z"
         },
         {
             "dataArray": [
                 21,
-                0
+                9759
             ],
-            "time": 32
+            "index": 15,
+            "time": "2020-04-15T21:49:11.751Z"
         },
         {
             "dataArray": [
                 21,
-                0
+                9759
             ],
-            "time": 33
+            "index": 16,
+            "time": "2020-04-15T21:50:11.751Z"
         },
         {
             "dataArray": [
                 21,
-                0
+                9759
             ],
-            "time": 34
+            "index": 17,
+            "time": "2020-04-15T21:51:11.751Z"
         },
         {
             "dataArray": [
                 21,
-                0
+                9759
             ],
-            "time": 35
+            "index": 18,
+            "time": "2020-04-15T21:52:11.751Z"
         },
         {
             "dataArray": [
                 21,
-                0
+                9759
             ],
-            "time": 36
+            "index": 19,
+            "time": "2020-04-15T21:53:11.751Z"
         },
         {
             "dataArray": [
                 21,
-                0
+                9759
             ],
-            "time": 37
+            "index": 20,
+            "time": "2020-04-15T21:54:11.751Z"
         },
         {
             "dataArray": [
                 21,
-                0
+                9759
             ],
-            "time": 38
+            "index": 21,
+            "time": "2020-04-15T21:55:11.751Z"
         },
         {
             "dataArray": [
                 21,
-                0
+                9759
             ],
-            "time": 39
+            "index": 22,
+            "time": "2020-04-15T21:56:11.751Z"
         },
         {
             "dataArray": [
                 21,
-                0
+                9759
             ],
-            "time": 40
+            "index": 23,
+            "time": "2020-04-15T21:57:11.751Z"
         },
         {
             "dataArray": [
                 21,
-                0
+                9759
             ],
-            "time": 41
+            "index": 24,
+            "time": "2020-04-15T21:58:11.751Z"
         },
         {
             "dataArray": [
                 21,
-                0
+                9759
             ],
-            "time": 42
+            "index": 25,
+            "time": "2020-04-15T21:59:11.751Z"
         },
         {
             "dataArray": [
                 21,
-                0
+                9759
             ],
-            "time": 43
+            "index": 26,
+            "time": "2020-04-15T22:00:11.751Z"
         },
         {
             "dataArray": [
                 21,
-                0
+                9759
             ],
-            "time": 44
+            "index": 27,
+            "time": "2020-04-15T22:01:11.751Z"
         },
         {
             "dataArray": [
                 21,
-                0
+                9759
             ],
-            "time": 45
+            "index": 28,
+            "time": "2020-04-15T22:02:11.751Z"
         },
         {
             "dataArray": [
                 21,
-                0
+                9759
             ],
-            "time": 46
+            "index": 29,
+            "time": "2020-04-15T22:03:11.751Z"
         },
         {
             "dataArray": [
                 21,
-                0
+                9759
             ],
-            "time": 47
+            "index": 30,
+            "time": "2020-04-15T22:04:11.751Z"
         },
         {
             "dataArray": [
                 21,
-                0
+                9759
             ],
-            "time": 48
+            "index": 31,
+            "time": "2020-04-15T22:05:11.751Z"
         },
         {
             "dataArray": [
                 21,
-                0
+                9759
             ],
-            "time": 49
+            "index": 32,
+            "time": "2020-04-15T22:06:11.751Z"
         },
         {
             "dataArray": [
                 21,
-                0
+                9759
             ],
-            "time": 50
+            "index": 33,
+            "time": "2020-04-15T22:07:11.751Z"
         },
         {
             "dataArray": [
                 21,
-                0
+                9759
             ],
-            "time": 51
+            "index": 34,
+            "time": "2020-04-15T22:08:11.751Z"
         },
         {
             "dataArray": [
                 21,
-                0
+                9759
             ],
-            "time": 52
+            "index": 35,
+            "time": "2020-04-15T22:09:11.751Z"
         },
         {
             "dataArray": [
                 21,
-                0
+                9759
             ],
-            "time": 53
+            "index": 36,
+            "time": "2020-04-15T22:10:11.751Z"
         },
         {
             "dataArray": [
                 21,
-                0
+                9759
             ],
-            "time": 54
+            "index": 37,
+            "time": "2020-04-15T22:11:11.751Z"
         },
         {
             "dataArray": [
                 21,
-                0
+                9759
             ],
-            "time": 55
+            "index": 38,
+            "time": "2020-04-15T22:12:11.751Z"
         },
         {
             "dataArray": [
                 21,
-                0
+                9759
             ],
-            "time": 56
+            "index": 39,
+            "time": "2020-04-15T22:13:11.751Z"
         },
         {
             "dataArray": [
                 21,
-                0
+                9759
             ],
-            "time": 57
+            "index": 40,
+            "time": "2020-04-15T22:14:11.751Z"
         },
         {
             "dataArray": [
-                36,
-                0
+                21,
+                9759
             ],
-            "time": 58
+            "index": 41,
+            "time": "2020-04-15T22:15:11.751Z"
         },
         {
             "dataArray": [
-                84,
-                0
+                21,
+                9759
             ],
-            "time": 59
+            "index": 42,
+            "time": "2020-04-15T22:16:11.751Z"
+        },
+        {
+            "dataArray": [
+                21,
+                9759
+            ],
+            "index": 43,
+            "time": "2020-04-15T22:17:11.751Z"
+        },
+        {
+            "dataArray": [
+                21,
+                9759
+            ],
+            "index": 44,
+            "time": "2020-04-15T22:18:11.751Z"
+        },
+        {
+            "dataArray": [
+                21,
+                9759
+            ],
+            "index": 45,
+            "time": "2020-04-15T22:19:11.751Z"
+        },
+        {
+            "dataArray": [
+                21,
+                9759
+            ],
+            "index": 46,
+            "time": "2020-04-15T22:20:11.751Z"
+        },
+        {
+            "dataArray": [
+                21,
+                9759
+            ],
+            "index": 47,
+            "time": "2020-04-15T22:21:11.751Z"
+        },
+        {
+            "dataArray": [
+                21,
+                9759
+            ],
+            "index": 48,
+            "time": "2020-04-15T22:22:11.751Z"
+        },
+        {
+            "dataArray": [
+                21,
+                9759
+            ],
+            "index": 49,
+            "time": "2020-04-15T22:23:11.751Z"
+        },
+        {
+            "dataArray": [
+                21,
+                9759
+            ],
+            "index": 50,
+            "time": "2020-04-15T22:24:11.751Z"
+        },
+        {
+            "dataArray": [
+                21,
+                9759
+            ],
+            "index": 51,
+            "time": "2020-04-15T22:25:11.751Z"
+        },
+        {
+            "dataArray": [
+                21,
+                9759
+            ],
+            "index": 52,
+            "time": "2020-04-15T22:26:11.751Z"
+        },
+        {
+            "dataArray": [
+                21,
+                9759
+            ],
+            "index": 53,
+            "time": "2020-04-15T22:27:11.751Z"
+        },
+        {
+            "dataArray": [
+                21,
+                9759
+            ],
+            "index": 54,
+            "time": "2020-04-15T22:28:11.751Z"
+        },
+        {
+            "dataArray": [
+                21,
+                9759
+            ],
+            "index": 55,
+            "time": "2020-04-15T22:29:11.751Z"
+        },
+        {
+            "dataArray": [
+                21,
+                9759
+            ],
+            "index": 56,
+            "time": "2020-04-15T22:30:11.751Z"
+        },
+        {
+            "dataArray": [
+                33,
+                9783
+            ],
+            "index": 57,
+            "time": "2020-04-15T22:31:11.751Z"
+        },
+        {
+            "dataArray": [
+                163,
+                10095
+            ],
+            "index": 58,
+            "time": "2020-04-15T22:32:11.751Z"
+        },
+        {
+            "dataArray": [
+                21,
+                9759
+            ],
+            "index": 59,
+            "time": "2020-04-15T22:33:11.751Z"
         }
     ],
-    "obsWindowStart":"Wed Apr 01 2020 20:37:06 GMT-0400 (Eastern Daylight Time)",
-    "obsWindowEnd":"Wed Apr 01 2020 20:42:06 GMT-0400 (Eastern Daylight Time)"
+    "kpi": [
+        [
+            [
+                163,
+                142,
+                142
+            ],
+            [
+                10095,
+                2019,
+                336
+            ]
+        ]
+    ],
+    "startTime": "2020-04-15T21:34:11.751Z",
+    "endTime": "2020-04-15T22:33:11.751Z"
 }

@@ -6,9 +6,7 @@
 
   <select  class='form-control' 
           (change)="onTimeObj($event)" [value]='selectedTime' style="margin-left: 20px">
-    <option value='10'>10 Minutes</option>
-    <option value='30'>30 Minutes</option>
-    <option value='60'>60 Minutes</option>
+    <option  *ngFor="let time of durations;" [value]='time'>{{time}} Minutes</option>
   </select>
 </div>
 

@@ -36,7 +36,7 @@ export class LineChartComponent implements OnInit {
 	private starttime: any;
 	private endTime: any;
 
-    private margin  = {top: 10, right: 0, bottom: 10, left: 20};
+    private margin  = {top: 10, right: 0, bottom: 10, left: 50};
     private width: number;
     private height: number;
 
@@ -56,7 +56,8 @@ export class LineChartComponent implements OnInit {
 	private zoom: any;
 	private area2: d3Shape.Area<[number, number]>;
 	private focus: any;
-	private masterData: any[];
+	private masterData: any;
+	private durations = [10, 30 , 60];
 
 
     private line: d3Shape.Line<[number, number]>; // this is line defination
@@ -71,12 +72,12 @@ export class LineChartComponent implements OnInit {
   ngOnInit() {
 	this.http.get('../assets/new.json').subscribe((data) => {
 		this.masterData = JSON.parse(JSON.stringify(data));
-		this.setdata(data['starttime'], data['endtime'], data['labels'], data['datapoints'], data['obsWindowStart'], data['obsWindowEnd']);
+		this.setdata(data.startTime, data.endTime, data.labels, data.dataPoints, data.obsWindowStart, data.obsWindowEnd);
 		this.buildSvg();
 		this.addXandYAxis();
 		this.drawLineAndPath();
 	});
-	 console.log(this.selected);
+	console.log(this.selected);
   }
 
   setdata(starttime, endtime, labels, datapoints, brushstarttime, brushendtime) {
@@ -89,10 +90,10 @@ export class LineChartComponent implements OnInit {
   onChangeObj(newObj) {
     console.log(newObj);
     this.selected = parseInt(newObj.target.value);
-	   d3.select('.svg').remove();
-	   d3.select('.svg1').remove();
-	   d3.select('.svg-con').append('svg').attr('width', '900').attr('height', '150').attr('class', 'svg');
-	   d3.select('.svg1-con').append('svg').attr('width', '900').attr('height', '150').attr('class', 'svg1');
+	d3.select('.svg').remove();
+	d3.select('.svg1').remove();
+	d3.select('.svg-con').append('svg').attr('width', '900').attr('height', '150').attr('class', 'svg');
+	d3.select('.svg1-con').append('svg').attr('width', '900').attr('height', '150').attr('class', 'svg1');
     this.buildSvg();
     this.addXandYAxis();
     this.drawLineAndPath();
@@ -105,7 +106,7 @@ export class LineChartComponent implements OnInit {
 	d3.select('.svg1').remove();
 	d3.select('.svg-con').append('svg').attr('width', '900').attr('height', '150').attr('class', 'svg');
 	d3.select('.svg1-con').append('svg').attr('width', '900').attr('height', '150').attr('class', 'svg1');
-	this.data = this.masterData['datapoints'].slice(this.masterData['datapoints'].length - this.selectedTime);
+	this.data = this.masterData.dataPoints.slice(this.masterData.dataPoints.length - this.selectedTime);
 	this.buildSvg();
 	this.addXandYAxis();
 	this.drawLineAndPath();
@@ -154,15 +155,13 @@ export class LineChartComponent implements OnInit {
 
 		this.area = d3Shape.area()
 			.curve(d3Shape.curveStepBefore)
-			.x((d: any) => this.x(moment(this.starttime)
-			.add(d.time * 5, 'minutes') ))
+			.x((d: any) => this.x(new Date(d.time)))
 			.y0(this.height)
 			.y1((d: any) => this.y(d.dataArray[this.selected]));
 
 		this.area2 = d3Shape.area()
 			.curve(d3Shape.curveStepBefore)
-			.x((d: any) => this.x2(moment(this.starttime)
-			.add(d.time * 5, 'minutes') ))
+			.x((d: any) => this.x2(new Date(d.time)))
 			.y0(this.height)
 			.y1((d: any) => this.y2(d.dataArray[this.selected]));
 
@@ -194,38 +193,26 @@ export class LineChartComponent implements OnInit {
 	    if (d3.event.sourceEvent && d3.event.sourceEvent.type === 'zoom') { return; } // ignore brush-by-zoom
 		   const s = d3.event.selection || this.x2.range();
 		   this.selectedBrush = s;
-	    this.x.domain(s.map(this.x2.invert, this.x2));
-	    this.focus.select('.area').attr('d', this.area);
-	    this.focus.select('.axis--x').call(this.xAxis);
-	    this.svg.select('.zoom').call(this.zoom.transform, d3Zoom.zoomIdentity
-	        .scale(this.width / (s[1] - s[0]))
-	        .translate(-s[0], 0));
+			this.x.domain(s.map(this.x2.invert, this.x2));
+			this.focus.select('.area').attr('d', this.area);
+			this.focus.select('.axis--x').call(this.xAxis);
+			this.svg.select('.zoom').call(this.zoom.transform, d3Zoom.zoomIdentity
+				.scale(this.width / (s[1] - s[0]))
+				.translate(-s[0], 0));
 	}
 
 	private zoomed() {
 	    if (d3.event.sourceEvent && d3.event.sourceEvent.type === 'brush') { return; } // ignore zoom-by-brush
 		   const t = d3.event.transform;
 		   this.x.domain(t.rescaleX(this.x2).domain());
-	    this.focus.select('.area').attr('d', this.area);
-	    this.focus.select('.axis--x').call(this.xAxis);
-	    this.context.select('.brush').call(this.brush.move, this.x.range().map(t.invertX, t));
+			this.focus.select('.area').attr('d', this.area);
+			this.focus.select('.axis--x').call(this.xAxis);
+			this.context.select('.brush').call(this.brush.move, this.x.range().map(t.invertX, t));
 	  }
 
 
 
     private drawLineAndPath() {
-
-		const minMax = d3Array.extent(this.data, (d: any, index) => { return moment(this.starttime)
-		.add(d.time , 'minutes'); });
-
-  		this.x.domain(minMax);
-
-
-		this.y.domain([0, d3Array.max(this.data, (d: any) => d.dataArray[this.selected])]);
-
-		this.x2.domain(this.x.domain());
-		this.y2.domain(this.y.domain());
-
 
 		this.focus.append('path')
 			.datum(this.data)
@@ -262,7 +249,7 @@ export class LineChartComponent implements OnInit {
 			.attr('class', 'brush')
 			.attr('id', 'brush')
 			.call(this.brush)
-			.call(this.brush.move, [50, 90])
+			.call(this.brush.move, [50, 130])
 			.selectAll('.brush>.handle').remove()
 			.selectAll('.brush>.overlay').remove();
 
@@ -307,22 +294,20 @@ export class LineChartComponent implements OnInit {
 			return;
 		}
 
-		const minMax = d3Array.extent(this.data, (d: any) => { return moment(this.starttime)
-		.add(d.time * 5, 'minutes'); });
-
+		const xminMax = d3Array.extent(this.data, (d: any) => new Date(d.time));
+		const yMinMax = d3Array.extent(this.data, (d: any) => d.dataArray[this.selected])
+		const durationMap = { 10: 2000, 30: 2000, 60: 1000 };
 		const duration = 1000;
-		// 1 day offset
-		const offset = 1 * 60 * 60 * 1000;
 
-		const from =  minMax[0] ? minMax[0].valueOf() : moment().valueOf();
+		const from =  xminMax[0] ? xminMax[0].valueOf() : moment().valueOf();
 		// 2-days window
-		const timeWindow = [from, from + 2 * offset];
+		const timeWindow = [new Date(from), new Date(xminMax[1].valueOf())];
 
 		// Recompute x,y domains
 		this.x2.domain(timeWindow);
-		this.y2.domain([0, d3Array.max(this.data, (d: any) => d.dataArray[this.selected])]);
+		this.y2.domain(yMinMax);
 
-		this.x.domain([moment(this.starttime), moment(this.starttime).add(5, 'minutes')]);
+		this.x.domain(this.x2.domain());
 		this.y.domain(this.y2.domain());
 
 
@@ -363,6 +348,11 @@ export class LineChartComponent implements OnInit {
 
 		// Remove first point
 		this.data.shift();
+		let finalObj = JSON.parse(JSON.stringify(this.data[this.data.length - 1 ]));
+		finalObj.time = moment(finalObj.time).add(1, 'minutes').valueOf();
+		finalObj.dataArray = [Math.floor(Math.random() * (200 - 10) + 10), Math.floor(Math.random() * (10000 - 10) + 1000) ]
+		this.masterData.dataPoints.push(finalObj);
+		this.data.push(finalObj);
 
 	  }
 
