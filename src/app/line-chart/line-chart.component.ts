@@ -72,7 +72,7 @@ export class LineChartComponent implements OnInit {
   ngOnInit() {
 	this.http.get('../assets/new.json').subscribe((data) => {
 		this.masterData = JSON.parse(JSON.stringify(data));
-		this.setdata(data.startTime, data.endTime, data.labels, data.dataPoints, data.obsWindowStart, data.obsWindowEnd);
+		this.setdata(data['startTime'], data['endTime'], data['labels'], data['dataPoints'], data['obsWindowStart'], data['obsWindowEnd']);
 		this.buildSvg();
 		this.addXandYAxis();
 		this.drawLineAndPath();
