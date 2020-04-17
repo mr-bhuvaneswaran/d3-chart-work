@@ -31,7 +31,7 @@ export class LineChartComponent implements OnInit {
 	private selectedTime: any = 60;
 	private isPlaying: any = true;
 	private selectedBrush: any;
-	private data: any[];
+	private data: any[] = [];
 	private labels: any[];
 	private starttime: any;
 	private endTime: any;
@@ -78,10 +78,18 @@ export class LineChartComponent implements OnInit {
 		this.drawLineAndPath();
 	});
 	console.log(this.selected);
+
+	setInterval(() => {
+		let finalObj = JSON.parse(JSON.stringify(this.data[this.data.length - 1 ]));
+		finalObj.time = moment(finalObj.time).add(1, 'minutes').valueOf();
+		finalObj.dataArray = [Math.floor(Math.random() * (200 - 10) + 10), Math.floor(Math.random() * (10000 - 10) + 1000) ]
+		this.masterData.dataPoints.push(finalObj);
+		this.setdata(this.starttime, this.endTime, this.labels, [finalObj], undefined, undefined);
+	}, 4000);
   }
 
   setdata(starttime, endtime, labels, datapoints, brushstarttime, brushendtime) {
-	this.data = datapoints;
+	this.data.push(...datapoints);
 	this.labels = labels;
 	this.starttime = starttime;
 	this.endTime = endtime;
@@ -348,11 +356,6 @@ export class LineChartComponent implements OnInit {
 
 		// Remove first point
 		this.data.shift();
-		let finalObj = JSON.parse(JSON.stringify(this.data[this.data.length - 1 ]));
-		finalObj.time = moment(finalObj.time).add(1, 'minutes').valueOf();
-		finalObj.dataArray = [Math.floor(Math.random() * (200 - 10) + 10), Math.floor(Math.random() * (10000 - 10) + 1000) ]
-		this.masterData.dataPoints.push(finalObj);
-		this.data.push(finalObj);
 
 	  }
 
