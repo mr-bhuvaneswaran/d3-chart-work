@@ -85,7 +85,8 @@ export class LineChartComponent implements OnInit {
 		finalObj.dataArray = [Math.floor(Math.random() * (200 - 10) + 10), Math.floor(Math.random() * (10000 - 10) + 1000) ]
 		this.masterData.dataPoints.push(finalObj);
 		this.setdata(this.starttime, this.endTime, this.labels, [finalObj], undefined, undefined);
-	}, 4000);
+		this.tick();
+	}, 20000);
   }
 
   setdata(starttime, endtime, labels, datapoints, brushstarttime, brushendtime) {
@@ -126,9 +127,9 @@ export class LineChartComponent implements OnInit {
     }
     private addXandYAxis() {
         // range of data configuring
-		this.x = d3Scale.scaleTime().range([0, this.width]);
+		this.x = d3Scale.scaleTime().range([0, this.width - this.margin.left - this.margin.right]);
 
-		this.x2 = d3Scale.scaleTime().range([0, this.width]);
+		this.x2 = d3Scale.scaleTime().range([0, this.width - this.margin.left - this.margin.right]);
 
 
 		this.y = d3Scale.scaleLinear().range([this.height, 20]);
@@ -205,7 +206,7 @@ export class LineChartComponent implements OnInit {
 			this.focus.select('.area').attr('d', this.area);
 			this.focus.select('.axis--x').call(this.xAxis);
 			this.svg.select('.zoom').call(this.zoom.transform, d3Zoom.zoomIdentity
-				.scale(this.width / (s[1] - s[0]))
+				.scale( (this.width - this.margin.left - this.margin.right) / (s[1] - s[0]))
 				.translate(-s[0], 0));
 	}
 
@@ -257,7 +258,7 @@ export class LineChartComponent implements OnInit {
 			.attr('class', 'brush')
 			.attr('id', 'brush')
 			.call(this.brush)
-			.call(this.brush.move, [50, 130])
+			.call(this.brush.move, [10, 85])
 			.selectAll('.brush>.handle').remove()
 			.selectAll('.brush>.overlay').remove();
 
@@ -291,7 +292,7 @@ export class LineChartComponent implements OnInit {
 	 this.focus.select('.area').attr('d', this.area);
 	 this.focus.select('.axis--x').call(this.xAxis);
 	 this.svg.select('.zoom').call(this.zoom.transform, d3Zoom.zoomIdentity
-	        .scale(this.width / (s[1] - s[0]))
+	        .scale((this.width - this.margin.left - this.margin.right) / (s[1] - s[0]))
 	        .translate(-s[0], 0));
 	}
 
@@ -305,7 +306,7 @@ export class LineChartComponent implements OnInit {
 		const xminMax = d3Array.extent(this.data, (d: any) => new Date(d.time));
 		const yMinMax = d3Array.extent(this.data, (d: any) => d.dataArray[this.selected])
 		const durationMap = { 10: 2000, 30: 2000, 60: 1000 };
-		const duration = 1000;
+		const duration = 3000;
 
 		const from =  xminMax[0] ? xminMax[0].valueOf() : moment().valueOf();
 		// 2-days window
@@ -340,10 +341,10 @@ export class LineChartComponent implements OnInit {
 
 		// Slide the line to the left
 		this.context.select('.area')
+		.attr('transform', 'translate(' + this.x2(from - duration) + ',0)')
 		  .transition()
 		  .duration(duration)
 		  .ease(D3.easeLinear)
-		  .attr('transform', 'translate(' + this.x2(from - duration) + ',0)')
 		  .on('end', () => {
 
 		if (!this.isPlaying) {
@@ -351,7 +352,10 @@ export class LineChartComponent implements OnInit {
 			return;
 		}
 		this.autoBrush();
-		this.tick();
+		// setTimeout(() => {
+		// 	this.tick();
+		// }, 20000);
+		
 		});
 
 		// Remove first point
