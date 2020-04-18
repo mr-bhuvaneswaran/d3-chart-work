@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 
 import * as d3 from 'd3-selection';
@@ -26,6 +26,8 @@ import { HttpClient } from '@angular/common/http';
 
 export class LineChartComponent implements OnInit {
 
+	@Output() brushTime = new EventEmitter();
+
     private title: any = 'Line Chart';
 	private selected: any = 0;
 	private selectedTime: any = 60;
@@ -35,6 +37,7 @@ export class LineChartComponent implements OnInit {
 	private labels: any[];
 	private starttime: any;
 	private endTime: any;
+	private isLive: any = true;
 
     private margin  = {top: 10, right: 0, bottom: 10, left: 50};
     private width: number;
@@ -80,12 +83,14 @@ export class LineChartComponent implements OnInit {
 	console.log(this.selected);
 
 	setInterval(() => {
-		let finalObj = JSON.parse(JSON.stringify(this.data[this.data.length - 1 ]));
+		const finalObj = JSON.parse(JSON.stringify(this.data[this.data.length - 1 ]));
 		finalObj.time = moment(finalObj.time).add(1, 'minutes').valueOf();
-		finalObj.dataArray = [Math.floor(Math.random() * (200 - 10) + 10), Math.floor(Math.random() * (10000 - 10) + 1000) ]
+		finalObj.dataArray = [Math.floor(Math.random() * (200 - 10) + 10), Math.floor(Math.random() * (10000 - 10) + 1000) ];
 		this.masterData.dataPoints.push(finalObj);
 		this.setdata(this.starttime, this.endTime, this.labels, [finalObj], undefined, undefined);
-		this.tick();
+		if (this.isLive) {
+			this.tick();
+		}
 	}, 20000);
   }
 
@@ -99,10 +104,10 @@ export class LineChartComponent implements OnInit {
   onChangeObj(newObj) {
     console.log(newObj);
     this.selected = parseInt(newObj.target.value);
-	d3.select('.svg').remove();
-	d3.select('.svg1').remove();
-	d3.select('.svg-con').append('svg').attr('width', '900').attr('height', '150').attr('class', 'svg');
-	d3.select('.svg1-con').append('svg').attr('width', '900').attr('height', '150').attr('class', 'svg1');
+	   d3.select('.svg').remove();
+	   d3.select('.svg1').remove();
+	   d3.select('.svg-con').append('svg').attr('width', '900').attr('height', '150').attr('class', 'svg');
+	   d3.select('.svg1-con').append('svg').attr('width', '900').attr('height', '150').attr('class', 'svg1');
     this.buildSvg();
     this.addXandYAxis();
     this.drawLineAndPath();
@@ -119,6 +124,11 @@ export class LineChartComponent implements OnInit {
 	this.buildSvg();
 	this.addXandYAxis();
 	this.drawLineAndPath();
+	const diffTime = (this.width - this.margin.right - this.margin.left) / (this.selectedTime / 5) ;
+	this.selectedBrush = [this.width - this.margin.right - this.margin.left - diffTime, this.width - this.margin.right - this.margin.left];
+	d3.select(".brush").call(this.brush.move, [this.selectedBrush[0], this.selectedBrush[1]]);
+	this.autoBrush();
+
   }
 
     private buildSvg() {
@@ -197,12 +207,13 @@ export class LineChartComponent implements OnInit {
 }
 
 
-
   	private brushed() {
 	    if (d3.event.sourceEvent && d3.event.sourceEvent.type === 'zoom') { return; } // ignore brush-by-zoom
 		   const s = d3.event.selection || this.x2.range();
 		   this.selectedBrush = s;
 			this.x.domain(s.map(this.x2.invert, this.x2));
+			this.brushTime.emit(s.map(this.x2.invert, this.x2));
+			console.log(s.map(this.x2.invert, this.x2));
 			this.focus.select('.area').attr('d', this.area);
 			this.focus.select('.axis--x').call(this.xAxis);
 			this.svg.select('.zoom').call(this.zoom.transform, d3Zoom.zoomIdentity
@@ -214,12 +225,10 @@ export class LineChartComponent implements OnInit {
 	    if (d3.event.sourceEvent && d3.event.sourceEvent.type === 'brush') { return; } // ignore zoom-by-brush
 		   const t = d3.event.transform;
 		   this.x.domain(t.rescaleX(this.x2).domain());
-			this.focus.select('.area').attr('d', this.area);
-			this.focus.select('.axis--x').call(this.xAxis);
-			this.context.select('.brush').call(this.brush.move, this.x.range().map(t.invertX, t));
+			  this.focus.select('.area').attr('d', this.area);
+			  this.focus.select('.axis--x').call(this.xAxis);
+			  this.context.select('.brush').call(this.brush.move, this.x.range().map(t.invertX, t));
 	  }
-
-
 
     private drawLineAndPath() {
 
@@ -254,11 +263,13 @@ export class LineChartComponent implements OnInit {
 			.attr('class', 'axis axis--y')
 			.call(this.yAxis);
 
+		const diffTime = (this.width - this.margin.right - this.margin.left) / (this.selectedTime / 5) ;
+
 		this.context.append('g')
 			.attr('class', 'brush')
 			.attr('id', 'brush')
 			.call(this.brush)
-			.call(this.brush.move, [10, 85])
+			.call(this.brush.move, [this.width - this.margin.right - this.margin.left - diffTime, this.width - this.margin.right - this.margin.left])
 			.selectAll('.brush>.handle').remove()
 			.selectAll('.brush>.overlay').remove();
 
@@ -285,10 +296,11 @@ export class LineChartComponent implements OnInit {
 
 	}
 
-
 	private autoBrush() {
 	 const s = this.selectedBrush;
 	 this.x.domain(s.map(this.x2.invert, this.x2));
+	 this.brushTime.emit(s.map(this.x2.invert, this.x2));
+	 console.log(s.map(this.x2.invert, this.x2));
 	 this.focus.select('.area').attr('d', this.area);
 	 this.focus.select('.axis--x').call(this.xAxis);
 	 this.svg.select('.zoom').call(this.zoom.transform, d3Zoom.zoomIdentity
@@ -296,7 +308,7 @@ export class LineChartComponent implements OnInit {
 	        .translate(-s[0], 0));
 	}
 
-	// This method tick the data flow in the chart. It uses 250ms duration to move the chart.
+	// This method tick the data flow in the chart. It uses 3000ms duration to move the chart.
 	private tick() {
 
 		if (this.data.length === 0) {
@@ -304,8 +316,7 @@ export class LineChartComponent implements OnInit {
 		}
 
 		const xminMax = d3Array.extent(this.data, (d: any) => new Date(d.time));
-		const yMinMax = d3Array.extent(this.data, (d: any) => d.dataArray[this.selected])
-		const durationMap = { 10: 2000, 30: 2000, 60: 1000 };
+		const yMinMax = d3Array.extent(this.data, (d: any) => d.dataArray[this.selected]);
 		const duration = 3000;
 
 		const from =  xminMax[0] ? xminMax[0].valueOf() : moment().valueOf();
@@ -352,10 +363,7 @@ export class LineChartComponent implements OnInit {
 			return;
 		}
 		this.autoBrush();
-		// setTimeout(() => {
-		// 	this.tick();
-		// }, 20000);
-		
+
 		});
 
 		// Remove first point
@@ -363,11 +371,39 @@ export class LineChartComponent implements OnInit {
 
 	  }
 
+	  moveBrush() {
+		  if ( (this.selectedBrush[1] + 5)  > (this.width - this.margin.left - this.margin.right ) || this.isLive || !this.isPlaying ) {
+			return;
+		  }
+		  this.selectedBrush[0] += 5;
+		  this.selectedBrush[1] += 5;
+		  d3.select(".brush").call(this.brush.move, [this.selectedBrush[0], this.selectedBrush[1]]);
+		  this.autoBrush();
+		  setTimeout(() => {
+			this.moveBrush();
+		  }, 2000);
+
+	  }
+
+	  onLive(event) {
+		this.isLive = true;
+		this.isPlaying = true;
+		this.svg1.style('fill', '#4682b3');
+		const diffTime = (this.width - this.margin.right - this.margin.left) / (this.selectedTime / 5) ;
+		this.selectedBrush = [this.width - this.margin.right - this.margin.left - diffTime, this.width - this.margin.right - this.margin.left];
+		d3.select(".brush").call(this.brush.move, [this.selectedBrush[0], this.selectedBrush[1]]);
+		this.autoBrush();
+	  }
+
 	  // This method is called when play or pause button is clicked
 	  onPlayPause(event) {
-		  this.isPlaying = !this.isPlaying;
-		  this.autoBrush();
-		  this.tick();
+		this.isPlaying = !this.isPlaying;
+		this.isLive = false;
+		this.svg1.style('fill', '#33333342');
+
+		if (this.isPlaying) {
+			this.moveBrush();
+		}
 	  }
 
 }
