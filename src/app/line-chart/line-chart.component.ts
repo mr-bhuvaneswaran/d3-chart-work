@@ -68,7 +68,7 @@ export class LineChartComponent implements OnInit {
 
    constructor(private http: HttpClient) {
     // configure margins and width/height of the graph
-    this.width = 894;
+    this.width = 950 - this.margin.left - this.margin.right ;
     this.height = 108;
   }
 
@@ -96,6 +96,7 @@ export class LineChartComponent implements OnInit {
 
   setdata(starttime, endtime, labels, datapoints, brushstarttime, brushendtime) {
 	this.data.push(...datapoints);
+	this.masterData.dataPoints.push(...datapoints);
 	this.labels = labels;
 	this.starttime = starttime;
 	this.endTime = endtime;
@@ -106,8 +107,8 @@ export class LineChartComponent implements OnInit {
     this.selected = parseInt(newObj.target.value);
 	   d3.select('.svg').remove();
 	   d3.select('.svg1').remove();
-	   d3.select('.svg-con').append('svg').attr('width', '900').attr('height', '150').attr('class', 'svg');
-	   d3.select('.svg1-con').append('svg').attr('width', '900').attr('height', '150').attr('class', 'svg1');
+	   d3.select('.svg-con').append('svg').attr('width', '1000').attr('height', '150').attr('class', 'svg');
+	   d3.select('.svg1-con').append('svg').attr('width', '1000').attr('height', '150').attr('class', 'svg1');
     this.buildSvg();
     this.addXandYAxis();
     this.drawLineAndPath();
@@ -118,28 +119,28 @@ export class LineChartComponent implements OnInit {
 	this.selectedTime = parseInt(event.target.value);
 	d3.select('.svg').remove();
 	d3.select('.svg1').remove();
-	d3.select('.svg-con').append('svg').attr('width', '900').attr('height', '150').attr('class', 'svg');
-	d3.select('.svg1-con').append('svg').attr('width', '900').attr('height', '150').attr('class', 'svg1');
+	d3.select('.svg-con').append('svg').attr('width', '1000').attr('height', '150').attr('class', 'svg');
+	d3.select('.svg1-con').append('svg').attr('width', '1000').attr('height', '150').attr('class', 'svg1');
 	this.data = this.masterData.dataPoints.slice(this.masterData.dataPoints.length - this.selectedTime);
 	this.buildSvg();
 	this.addXandYAxis();
 	this.drawLineAndPath();
-	const diffTime = (this.width - this.margin.right - this.margin.left) / (this.selectedTime / 5) ;
-	this.selectedBrush = [this.width - this.margin.right - this.margin.left - diffTime, this.width - this.margin.right - this.margin.left];
+	const diffTime = (this.width + 50) / (this.selectedTime / 5) ;
+	this.selectedBrush = [this.width - diffTime, this.width];
 	d3.select(".brush").call(this.brush.move, [this.selectedBrush[0], this.selectedBrush[1]]);
 	this.autoBrush();
 
   }
 
     private buildSvg() {
-		this.svg = d3.select('.svg').style('stroke', '#000').style('fill', '#4682b3');
-		this.svg1 = d3.select('.svg1').style('stroke', '#000').style('fill', '#4682b3');
+		this.svg = d3.select('.svg').style('stroke', '#000').style('fill', '#57C4C4');
+		this.svg1 = d3.select('.svg1').style('stroke', '#000').style('fill', '#57C4C4');
     }
     private addXandYAxis() {
         // range of data configuring
-		this.x = d3Scale.scaleTime().range([0, this.width - this.margin.left - this.margin.right]);
+		this.x = d3Scale.scaleTime().range([0, this.width]);
 
-		this.x2 = d3Scale.scaleTime().range([0, this.width - this.margin.left - this.margin.right]);
+		this.x2 = d3Scale.scaleTime().range([0, this.width]);
 
 
 		this.y = d3Scale.scaleLinear().range([this.height, 20]);
@@ -217,7 +218,7 @@ export class LineChartComponent implements OnInit {
 			this.focus.select('.area').attr('d', this.area);
 			this.focus.select('.axis--x').call(this.xAxis);
 			this.svg.select('.zoom').call(this.zoom.transform, d3Zoom.zoomIdentity
-				.scale( (this.width - this.margin.left - this.margin.right) / (s[1] - s[0]))
+				.scale( (this.width) / (s[1] - s[0]))
 				.translate(-s[0], 0));
 	}
 
@@ -252,6 +253,7 @@ export class LineChartComponent implements OnInit {
 		this.context.append('path')
 			.datum(this.data)
 			.attr('class', 'area')
+			.attr('id', 'areaGreen')
 			.attr('d', this.area2);
 
 		this.context.append('g')
@@ -263,13 +265,13 @@ export class LineChartComponent implements OnInit {
 			.attr('class', 'axis axis--y')
 			.call(this.yAxis);
 
-		const diffTime = (this.width - this.margin.right - this.margin.left) / (this.selectedTime / 5) ;
+		const diffTime = (this.width + 50) / (this.selectedTime / 5) ;
 
 		this.context.append('g')
 			.attr('class', 'brush')
 			.attr('id', 'brush')
 			.call(this.brush)
-			.call(this.brush.move, [this.width - this.margin.right - this.margin.left - diffTime, this.width - this.margin.right - this.margin.left])
+			.call(this.brush.move, [this.width - diffTime, this.width])
 			.selectAll('.brush>.handle').remove()
 			.selectAll('.brush>.overlay').remove();
 
@@ -304,7 +306,7 @@ export class LineChartComponent implements OnInit {
 	 this.focus.select('.area').attr('d', this.area);
 	 this.focus.select('.axis--x').call(this.xAxis);
 	 this.svg.select('.zoom').call(this.zoom.transform, d3Zoom.zoomIdentity
-	        .scale((this.width - this.margin.left - this.margin.right) / (s[1] - s[0]))
+	        .scale((this.width) / (s[1] - s[0]))
 	        .translate(-s[0], 0));
 	}
 
@@ -372,7 +374,7 @@ export class LineChartComponent implements OnInit {
 	  }
 
 	  moveBrush() {
-		  if ( (this.selectedBrush[1] + 5)  > (this.width - this.margin.left - this.margin.right ) || this.isLive || !this.isPlaying ) {
+		  if ( (this.selectedBrush[1] + 5)  > (this.width ) || this.isLive || !this.isPlaying ) {
 			return;
 		  }
 		  this.selectedBrush[0] += 5;
@@ -388,22 +390,21 @@ export class LineChartComponent implements OnInit {
 	  onLive(event) {
 		this.isLive = true;
 		this.isPlaying = true;
-		this.svg1.style('fill', '#4682b3');
-		const diffTime = (this.width - this.margin.right - this.margin.left) / (this.selectedTime / 5) ;
-		this.selectedBrush = [this.width - this.margin.right - this.margin.left - diffTime, this.width - this.margin.right - this.margin.left];
+		this.svg1.style('fill', '#57C4C4');
+		const diffTime = (this.width) / (this.selectedTime / 5) ;
+		this.selectedBrush = [this.width - diffTime, this.width];
 		d3.select(".brush").call(this.brush.move, [this.selectedBrush[0], this.selectedBrush[1]]);
 		this.autoBrush();
 	  }
 
-	  // This method is called when play or pause button is clicked
+    // This method is called when play or pause button is clicked
 	  onPlayPause(event) {
-		this.isPlaying = !this.isPlaying;
-		this.isLive = false;
-		this.svg1.style('fill', '#33333342');
-
-		if (this.isPlaying) {
-			this.moveBrush();
-		}
-	  }
+      this.isPlaying = !this.isPlaying;
+      this.isLive = false;
+	  this.svg1.style('fill','#33333342');
+      if (this.isPlaying) {
+        this.moveBrush();
+      }
+      }
 
 }
