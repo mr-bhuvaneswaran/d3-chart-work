@@ -52,6 +52,7 @@ export class LineChartComponent implements OnInit {
     private xAxis: any;
     private xAxis2: any;
 	private yAxis: any;
+	private yAxis2: any;
 
 	private context: any;
 	private brush: any;
@@ -156,6 +157,7 @@ export class LineChartComponent implements OnInit {
 
 		// Configure the Y Axis
 		this.yAxis = d3Axis.axisLeft(this.y);
+		this.yAxis2 = d3Axis.axisLeft(this.y2);
 
 		this.brush1 = d3Brush.brushX()
 		.extent([[0, 0], [this.width, this.height]])
@@ -245,6 +247,10 @@ export class LineChartComponent implements OnInit {
 			.call(this.xAxis);
 
 		this.focus.append('g')
+			.attr('class', 'axis axis--y')
+			.call(this.yAxis);
+
+		this.focus.append('g')
 			.attr('class', 'brush1')
 			.call(this.brush1)
 			.call(this.brush1.move, this.x.range())
@@ -263,7 +269,9 @@ export class LineChartComponent implements OnInit {
 
 		this.context.append('g')
 			.attr('class', 'axis axis--y')
-			.call(this.yAxis);
+			.call(this.yAxis2);
+
+
 
 		const diffTime = (this.width + 50) / (this.selectedTime / 5) ;
 
@@ -348,6 +356,11 @@ export class LineChartComponent implements OnInit {
 
 		// Update y axis
 		this.context.select('.axis.axis--y')
+		  .transition()
+		  .duration(duration)
+		  .call(this.yAxis2);
+
+		this.focus.select('.axis.axis--y')
 		  .transition()
 		  .duration(duration)
 		  .call(this.yAxis);
