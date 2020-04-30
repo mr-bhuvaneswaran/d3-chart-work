@@ -63,7 +63,6 @@ export class LineChartComponent implements OnInit {
 	private masterData: any;
 	private durations = [10, 30 , 60];
 
-
     private line: d3Shape.Line<[number, number]>; // this is line defination
 	private area: d3Shape.Area<[number, number]>; // this is line defination
 
@@ -134,8 +133,8 @@ export class LineChartComponent implements OnInit {
   }
 
     private buildSvg() {
-		this.svg = d3.select('.svg').style('stroke', '#000').style('fill', '#57C4C4');
-		this.svg1 = d3.select('.svg1').style('stroke', '#000').style('fill', '#57C4C4');
+		this.svg = d3.select('.svg').style('fill', '#57C4C4');
+		this.svg1 = d3.select('.svg1').style('fill', '#57C4C4');
     }
     private addXandYAxis() {
         // range of data configuring
@@ -212,6 +211,7 @@ export class LineChartComponent implements OnInit {
 
   	private brushed() {
 	    if (d3.event.sourceEvent && d3.event.sourceEvent.type === 'zoom') { return; } // ignore brush-by-zoom
+		if (d3.event.sourceEvent && d3.event.sourceEvent.type === 'mousemove' && this.isLive) {this.onPlayPause(null); }
 		   const s = d3.event.selection || this.x2.range();
 		   this.selectedBrush = s;
 			this.x.domain(s.map(this.x2.invert, this.x2));
@@ -259,7 +259,6 @@ export class LineChartComponent implements OnInit {
 		this.context.append('path')
 			.datum(this.data)
 			.attr('class', 'area')
-			.attr('id', 'areaGreen')
 			.attr('d', this.area2);
 
 		this.context.append('g')
@@ -271,7 +270,12 @@ export class LineChartComponent implements OnInit {
 			.attr('class', 'axis axis--y')
 			.call(this.yAxis2);
 
-
+		this.context.append("circle")
+			.attr('class', 'last-circle')
+			.style("fill", "red")
+			.attr("r", 3)
+			.attr("cy", 0)
+			.attr("cx", 0);
 
 		const diffTime = (this.width + 50) / (this.selectedTime / 5) ;
 
@@ -280,8 +284,7 @@ export class LineChartComponent implements OnInit {
 			.attr('id', 'brush')
 			.call(this.brush)
 			.call(this.brush.move, [this.width - diffTime, this.width])
-			.selectAll('.brush>.handle').remove()
-			.selectAll('.brush>.overlay').remove();
+			.selectAll('.handle').style('pointer-events', 'none');
 
 		this.svg.append('line')
 			.style('fill', 'transparent')
@@ -299,7 +302,6 @@ export class LineChartComponent implements OnInit {
 			.attr('transform', 'translate(' + this.margin.left + ',' + this.margin.top + ')')
 			.call(this.zoom);
 
-		d3.selectAll('.brush>.handle').remove();
 		d3.selectAll('.brush>.overlay').remove();
 
 		this.tick();
@@ -340,7 +342,6 @@ export class LineChartComponent implements OnInit {
 		this.x.domain(this.x2.domain());
 		this.y.domain(this.y2.domain());
 
-
 		// Redraw the line
 		this.context.select('.area')
 		  .attr('d', this.area2(this.data))
@@ -365,9 +366,17 @@ export class LineChartComponent implements OnInit {
 		  .duration(duration)
 		  .call(this.yAxis);
 
+		const lastData = this.data[this.data.length - 1 ].dataArray[this.selected];
+
+		this.context.select('.last-circle')
+			.transition()
+			.duration(0)
+			.attr("cy", this.y(lastData))
+			.attr("cx", this.x(xminMax[1]));
+
+
 		// Slide the line to the left
 		this.context.select('.area')
-		.attr('transform', 'translate(' + this.x2(from - duration) + ',0)')
 		  .transition()
 		  .duration(duration)
 		  .ease(D3.easeLinear)

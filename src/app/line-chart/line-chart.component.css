@@ -37,4 +37,5 @@ g.brush>.resize {
 
 .handle {
   pointer-events: none;
+  stroke: #000 !important;
 }
