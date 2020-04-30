@@ -160,7 +160,7 @@ export class LineChartComponent implements OnInit {
 		this.yAxis2 = d3Axis.axisLeft(this.y2);
 
 		this.brush1 = d3Brush.brushX()
-		.extent([[0, 0], [this.width, this.height]])
+		.extent([[10, 0], [this.width, this.height]])
 		.on('brush end', null);
 
 		this.brush = d3Brush.brushX()
@@ -281,10 +281,10 @@ export class LineChartComponent implements OnInit {
 			  .attr("cursor", "ew-resize")
 			  .attr("d", brushResizePath)
 		
-		focusHandle.attr("transform", (d , i) => { return "translate(" + [ this.width * i , - this.height / 4] + ")"; });
+		focusHandle.attr("transform", (d , i) => { return "translate(" + [ i ? this.width: 10  , - this.height / 4] + ")"; });
 
-		focusBrush.call(this.brush1.move, this.x.range())
-			.selectAll('.handle .handle--custom').style('pointer-events', 'none');
+		focusBrush.call(this.brush1.move, [this.x.range()[0] + 10, this.x.range()[1]])
+			.selectAll('.handle').style('pointer-events', 'none');
 		
 		focusBrush.selectAll('.handle--custom').style('pointer-events', 'none');
 
@@ -461,6 +461,8 @@ export class LineChartComponent implements OnInit {
 		this.isLive = true;
 		this.isPlaying = true;
 		this.svg1.style('fill', '#57C4C4');
+		this.focus.select('.last-circle').style('fill', 'red');
+	  this.context.select('.last-circle').style('fill', 'red');
 		const diffTime = (this.width) / (this.selectedTime / 5) ;
 		this.selectedBrush = [this.width - diffTime, this.width];
 		d3.select(".brush").call(this.brush.move, [this.selectedBrush[0], this.selectedBrush[1]]);
@@ -472,6 +474,8 @@ export class LineChartComponent implements OnInit {
       this.isPlaying = !this.isPlaying;
       this.isLive = false;
 	  this.svg1.style('fill','#33333342');
+	  this.focus.select('.last-circle').style('fill', '#ff000000');
+	  this.context.select('.last-circle').style('fill', '#ff000000');
       if (this.isPlaying) {
         this.moveBrush();
       }
