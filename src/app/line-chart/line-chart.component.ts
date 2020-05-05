@@ -128,7 +128,7 @@ export class LineChartComponent implements OnInit {
 	this.drawLineAndPath();
 	const diffTime = (this.width + 50) / (this.selectedTime / 5) ;
 	this.selectedBrush = [this.width - diffTime, this.width];
-	d3.select(".brush").call(this.brush.move, [this.selectedBrush[0], this.selectedBrush[1]]);
+	d3.select('.brush').call(this.brush.move, [this.selectedBrush[0], this.selectedBrush[1]]);
 	this.autoBrush();
 
   }
@@ -216,8 +216,8 @@ export class LineChartComponent implements OnInit {
 		if (d3.event.sourceEvent && d3.event.sourceEvent.type === 'mousemove' && this.isLive) {this.onPlayPause(null); }
 		   const s = d3.event.selection || this.x2.range();
 		   this.selectedBrush = s;
-		   if(this.handle) {
-			this.handle.attr("display", null).attr("transform", (d, i) => { return "translate(" + [ s[i], - this.height / 4] + ")"; });
+		   if (this.handle) {
+			this.handle.attr('display', null).attr('transform', (d, i) => 'translate(' + [ s[i], - this.height / 4] + ')');
 		   }
 			this.x.domain(s.map(this.x2.invert, this.x2));
 			this.brushTime.emit(s.map(this.x2.invert, this.x2));
@@ -241,10 +241,10 @@ export class LineChartComponent implements OnInit {
     private drawLineAndPath() {
 
 		const brushResizePath = (d) => {
-			var e = +(d.type == "e"),
+			var e = +(d.type == 'e'),
 				x = e ? 1 : -1,
 				y = this.height / 2;
-			return "M" + (.5 * x) + "," + y + "A6,6 0 0 " + e + " " + (6.5 * x) + "," + (y + 6) + "V" + (2 * y - 6) + "A6,6 0 0 " + e + " " + (.5 * x) + "," + (2 * y) + "Z" + "M" + (2.5 * x) + "," + (y + 8) + "V" + (2 * y - 8) + "M" + (4.5 * x) + "," + (y + 8) + "V" + (2 * y - 8);
+			return 'M' + (.5 * x) + ',' + y + 'A6,6 0 0 ' + e + ' ' + (6.5 * x) + ',' + (y + 6) + 'V' + (2 * y - 6) + 'A6,6 0 0 ' + e + ' ' + (.5 * x) + ',' + (2 * y) + 'Z' + 'M' + (2.5 * x) + ',' + (y + 8) + 'V' + (2 * y - 8) + 'M' + (4.5 * x) + ',' + (y + 8) + 'V' + (2 * y - 8);
 		}
 
 		this.focus.append('path')
@@ -262,26 +262,35 @@ export class LineChartComponent implements OnInit {
 			.attr('class', 'axis axis--y')
 			.call(this.yAxis);
 
-		this.focus.append("circle")
+		
+		this.focus.append('circle')
+			.attr('class', 'outer-circle')
+			.attr('cx', 0)
+			.attr('cy', 0)
+			.attr('r',  7)
+			.style('fill', '#EB780A')
+			.style('opacity', '40%');
+
+		this.focus.append('circle')
 			.attr('class', 'last-circle')
-			.style("fill", "red")
-			.attr("r", 3)
-			.attr("cy", 0)
-			.attr("cx", 0);
+			.style('fill', '#EB780A')
+			.attr('r', 7)
+			.attr('cy', 0)
+			.attr('cx', 0);
 
 		const focusBrush = this.focus.append('g')
 			.attr('class', 'brush1')
 			.call(this.brush1);
 
-		const focusHandle = focusBrush.selectAll(".handle--custom")
-			.data([{type: "w"}, {type: "e"}])
-			.enter().append("path")
-			  .attr("class", "handle--custom")
-			  .attr("stroke", "#000")
-			  .attr("cursor", "ew-resize")
-			  .attr("d", brushResizePath)
+		const focusHandle = focusBrush.selectAll('.handle--custom')
+			.data([{type: 'w'}, {type: 'e'}])
+			.enter().append('path')
+			  .attr('class', 'handle--custom')
+			  .attr('stroke', '#000')
+			  .attr('cursor', 'ew-resize')
+			  .attr('d', brushResizePath)
 		
-		focusHandle.attr("transform", (d , i) => { return "translate(" + [ i ? this.width: 10  , - this.height / 4] + ")"; });
+		focusHandle.attr('transform', (d , i) => 'translate(' + [ i ? this.width : 10  , - this.height / 4] + ')');
 
 		focusBrush.call(this.brush1.move, [this.x.range()[0] + 10, this.x.range()[1]])
 			.selectAll('.handle').style('pointer-events', 'none');
@@ -302,12 +311,22 @@ export class LineChartComponent implements OnInit {
 			.attr('class', 'axis axis--y')
 			.call(this.yAxis2);
 
-		this.context.append("circle")
+
+		this.context.append('circle')
+		.attr('class', 'outer-circle')
+		.attr('cx', 0)
+		.attr('cy', 0)
+		.attr('r',  17)
+		.style('fill', '#EB780A')
+		.style('opacity', '40%');
+
+
+		this.context.append('circle')
 			.attr('class', 'last-circle')
-			.style("fill", "red")
-			.attr("r", 3)
-			.attr("cy", 0)
-			.attr("cx", 0);
+			.style('fill', '#EB780A')
+			.attr('r', 7)
+			.attr('cy', 0)
+			.attr('cx', 0);
 
 		const diffTime = (this.width + 50) / (this.selectedTime / 5) ;
 
@@ -316,13 +335,13 @@ export class LineChartComponent implements OnInit {
 			.attr('id', 'brush')
 			.call(this.brush);
 
-		this.handle = contextBrush.selectAll(".handle--custom")
-			.data([{type: "w"}, {type: "e"}])
-			.enter().append("path")
-			  .attr("class", "handle--custom")
-			  .attr("stroke", "#000")
-			  .attr("cursor", "ew-resize")
-			  .attr("d", brushResizePath);
+		this.handle = contextBrush.selectAll('.handle--custom')
+			.data([{type: 'w'}, {type: 'e'}])
+			.enter().append('path')
+			  .attr('class', 'handle--custom')
+			  .attr('stroke', '#000')
+			  .attr('cursor', 'ew-resize')
+			  .attr('d', brushResizePath);
 
 		contextBrush.call(this.brush.move, [this.width - diffTime, this.width])
 		.selectAll('.handle').style('pointer-events', 'none');
@@ -344,6 +363,16 @@ export class LineChartComponent implements OnInit {
 			.attr('transform', 'translate(' + this.margin.left + ',' + this.margin.top + ')')
 			.call(this.zoom);
 
+		setInterval(() => {
+			const radius = d3.selectAll('.outer-circle').attr('r');
+			if (radius === '0') {
+				d3.selectAll('.outer-circle').attr('r', 17).style('opacity', '40%');
+			} else if (radius === '17') {
+				d3.selectAll('.outer-circle').attr('r', 21).style('opacity', '0%');
+			} else {
+				d3.selectAll('.outer-circle').attr('r', 0).style('opacity', '40%');
+			}
+		}, 500);
 		d3.selectAll('.brush>.overlay').remove();
 
 		this.tick();
@@ -410,17 +439,29 @@ export class LineChartComponent implements OnInit {
 
 		const lastData = this.data[this.data.length - 1 ].dataArray[this.selected];
 
+		this.context.select('.outer-circle')
+			.transition()
+			.duration(0)
+			.attr('cy', this.y(lastData))
+			.attr('cx', this.x(xminMax[1]));
+
+		this.focus.select('.outer-circle')
+			.transition()
+			.duration(0)
+			.attr('cy', this.y(lastData))
+			.attr('cx', this.x(xminMax[1]));
+
 		this.context.select('.last-circle')
 			.transition()
 			.duration(0)
-			.attr("cy", this.y(lastData))
-			.attr("cx", this.x(xminMax[1]));
+			.attr('cy', this.y(lastData))
+			.attr('cx', this.x(xminMax[1]));
 
 		this.focus.select('.last-circle')
 			.transition()
 			.duration(0)
-			.attr("cy", this.y(lastData))
-			.attr("cx", this.x(xminMax[1]));
+			.attr('cy', this.y(lastData))
+			.attr('cx', this.x(xminMax[1]));
 
 
 		// Slide the line to the left
@@ -449,7 +490,7 @@ export class LineChartComponent implements OnInit {
 		  }
 		  this.selectedBrush[0] += 5;
 		  this.selectedBrush[1] += 5;
-		  d3.select(".brush").call(this.brush.move, [this.selectedBrush[0], this.selectedBrush[1]]);
+		  d3.select('.brush').call(this.brush.move, [this.selectedBrush[0], this.selectedBrush[1]]);
 		  this.autoBrush();
 		  setTimeout(() => {
 			this.moveBrush();
@@ -461,11 +502,11 @@ export class LineChartComponent implements OnInit {
 		this.isLive = true;
 		this.isPlaying = true;
 		this.svg1.style('fill', '#57C4C4');
-		this.focus.select('.last-circle').style('fill', 'red');
-	  this.context.select('.last-circle').style('fill', 'red');
+		d3.selectAll('.last-circle').style('fill', '#EB780A');
+		d3.selectAll('.outer-circle').style('fill', '#EB780A');
 		const diffTime = (this.width) / (this.selectedTime / 5) ;
 		this.selectedBrush = [this.width - diffTime, this.width];
-		d3.select(".brush").call(this.brush.move, [this.selectedBrush[0], this.selectedBrush[1]]);
+		d3.select('.brush').call(this.brush.move, [this.selectedBrush[0], this.selectedBrush[1]]);
 		this.autoBrush();
 	  }
 
@@ -473,9 +514,9 @@ export class LineChartComponent implements OnInit {
 	  onPlayPause(event) {
       this.isPlaying = !this.isPlaying;
       this.isLive = false;
-	  this.svg1.style('fill','#33333342');
-	  this.focus.select('.last-circle').style('fill', '#ff000000');
-	  this.context.select('.last-circle').style('fill', '#ff000000');
+	  this.svg1.style('fill', '#33333342');
+	  d3.selectAll('.last-circle').style('fill', '#ff000000');
+	  d3.selectAll('.outer-circle').style('fill', '#ff000000');
       if (this.isPlaying) {
         this.moveBrush();
       }
