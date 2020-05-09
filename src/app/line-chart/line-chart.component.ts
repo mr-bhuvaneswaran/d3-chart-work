@@ -63,6 +63,7 @@ export class LineChartComponent implements OnInit {
 	private masterData: any;
 	private durations = [10, 30 , 60];
 	private handle: any = null;
+	private radius: any = 0;
 
     private line: d3Shape.Line<[number, number]>; // this is line defination
 	private area: d3Shape.Area<[number, number]>; // this is line defination
@@ -267,14 +268,14 @@ export class LineChartComponent implements OnInit {
 			.attr('class', 'outer-circle')
 			.attr('cx', 0)
 			.attr('cy', 0)
-			.attr('r',  7)
+			.attr('r',  0)
 			.style('fill', '#EB780A')
 			.style('opacity', '40%');
 
 		this.focus.append('circle')
 			.attr('class', 'last-circle')
 			.style('fill', '#EB780A')
-			.attr('r', 7)
+			.attr('r', 5)
 			.attr('cy', 0)
 			.attr('cx', 0);
 
@@ -316,7 +317,7 @@ export class LineChartComponent implements OnInit {
 		.attr('class', 'outer-circle')
 		.attr('cx', 0)
 		.attr('cy', 0)
-		.attr('r',  17)
+		.attr('r',  0)
 		.style('fill', '#EB780A')
 		.style('opacity', '40%');
 
@@ -324,7 +325,7 @@ export class LineChartComponent implements OnInit {
 		this.context.append('circle')
 			.attr('class', 'last-circle')
 			.style('fill', '#EB780A')
-			.attr('r', 7)
+			.attr('r', 5)
 			.attr('cy', 0)
 			.attr('cx', 0);
 
@@ -364,15 +365,10 @@ export class LineChartComponent implements OnInit {
 			.call(this.zoom);
 
 		setInterval(() => {
-			const radius = d3.selectAll('.outer-circle').attr('r');
-			if (radius === '0') {
-				d3.selectAll('.outer-circle').attr('r', 17).style('opacity', '40%');
-			} else if (radius === '17') {
-				d3.selectAll('.outer-circle').attr('r', 21).style('opacity', '0%');
-			} else {
-				d3.selectAll('.outer-circle').attr('r', 0).style('opacity', '40%');
-			}
-		}, 500);
+			this.radius = this.radius === 17 ? -17 : this.radius;
+			this.radius++;
+			d3.selectAll('.outer-circle').attr('r', Math.abs(this.radius)).style('opacity', '40%');
+		}, 50);
 		d3.selectAll('.brush>.overlay').remove();
 
 		this.tick();
