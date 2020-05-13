@@ -218,7 +218,7 @@ export class LineChartComponent implements OnInit {
 		   const s = d3.event.selection || this.x2.range();
 		   this.selectedBrush = s;
 		   if (this.handle) {
-			this.handle.attr('display', null).attr('transform', (d, i) => 'translate(' + [ s[i], - this.height / 4] + ')');
+			this.handle.attr('display', null).attr('transform', (d, i) => 'translate(' + [ s[i] - 4 , 5] + ')');
 		   }
 			this.x.domain(s.map(this.x2.invert, this.x2));
 			this.brushTime.emit(s.map(this.x2.invert, this.x2));
@@ -242,10 +242,10 @@ export class LineChartComponent implements OnInit {
     private drawLineAndPath() {
 
 		const brushResizePath = (d) => {
-			var e = +(d.type == 'e'),
-				x = e ? 1 : -1,
-				y = this.height / 2;
-			return 'M' + (.5 * x) + ',' + y + 'A6,6 0 0 ' + e + ' ' + (6.5 * x) + ',' + (y + 6) + 'V' + (2 * y - 6) + 'A6,6 0 0 ' + e + ' ' + (.5 * x) + ',' + (2 * y) + 'Z' + 'M' + (2.5 * x) + ',' + (y + 8) + 'V' + (2 * y - 8) + 'M' + (4.5 * x) + ',' + (y + 8) + 'V' + (2 * y - 8);
+			return d.type === 'e' ?
+			"M 3 2 L 4 2 L 4 36.5 C 5.933 36.5 7.5 38.067 7.5 40 L 7.5 58 C 7.5 59.933 5.933 61.5 4 61.5 L 4 61.5 L 4 61.5 L 4 97.641 L 3 97.641 L 3 2 Z"
+			:
+			"M 3.5 0 L 4.5 0 L 4.5 95.641 L 3.5 95.641 L 3.5 59.5 C 1.567 59.5 2.36724e-16 57.933 0 56 L 0 38 C -2.36724e-16 36.067 1.567 34.5 3.5 34.5 L 3.5 34.5 L 3.5 34.5 L 3.5 0 Z";
 		}
 
 		this.focus.append('path')
@@ -281,22 +281,25 @@ export class LineChartComponent implements OnInit {
 
 		const focusBrush = this.focus.append('g')
 			.attr('class', 'brush1')
+			.attr('pointer-events', 'none')
 			.call(this.brush1);
-
+		
 		const focusHandle = focusBrush.selectAll('.handle--custom')
 			.data([{type: 'w'}, {type: 'e'}])
 			.enter().append('path')
 			  .attr('class', 'handle--custom')
-			  .attr('stroke', '#000')
+			  .attr('stroke', '#999999')
 			  .attr('cursor', 'ew-resize')
-			  .attr('d', brushResizePath)
+			  .attr('d', brushResizePath);
 		
-		focusHandle.attr('transform', (d , i) => 'translate(' + [ i ? this.width : 10  , - this.height / 4] + ')');
+		focusHandle.attr('transform', (d , i) => 'translate(' + [ i ? this.width - 5 : 0  , 5] + ')');
 
-		focusBrush.call(this.brush1.move, [this.x.range()[0] + 10, this.x.range()[1]])
+		focusBrush.call(this.brush1.move, [this.x.range()[0] + 5, this.x.range()[1]])
 			.selectAll('.handle').style('pointer-events', 'none');
 		
 		focusBrush.selectAll('.handle--custom').style('pointer-events', 'none');
+		focusBrush.select('.overlay').remove();
+		focusBrush.style('pointer-events', 'none');
 
 		this.context.append('path')
 			.datum(this.data)
@@ -340,7 +343,7 @@ export class LineChartComponent implements OnInit {
 			.data([{type: 'w'}, {type: 'e'}])
 			.enter().append('path')
 			  .attr('class', 'handle--custom')
-			  .attr('stroke', '#000')
+			  .attr('stroke', '#999999')
 			  .attr('cursor', 'ew-resize')
 			  .attr('d', brushResizePath);
 
@@ -369,6 +372,7 @@ export class LineChartComponent implements OnInit {
 			this.radius++;
 			d3.selectAll('.outer-circle').attr('r', Math.abs(this.radius)).style('opacity', '40%');
 		}, 1000);
+
 		d3.selectAll('.brush>.overlay').remove();
 
 		this.tick();
