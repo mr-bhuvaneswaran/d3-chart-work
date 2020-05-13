@@ -346,7 +346,7 @@ export class LineChartComponent implements OnInit {
 
 		contextBrush.call(this.brush.move, [this.width - diffTime, this.width])
 		.selectAll('.handle').style('pointer-events', 'none');
-		contextBrush.selectAll('.handle--custom').style('pointer-events', 'none');
+		contextBrush.selectAll('.handle--custom');
 
 		this.svg.append('line')
 			.style('fill', 'transparent')
@@ -368,7 +368,7 @@ export class LineChartComponent implements OnInit {
 			this.radius = this.radius === 17 ? -17 : this.radius;
 			this.radius++;
 			d3.selectAll('.outer-circle').attr('r', Math.abs(this.radius)).style('opacity', '40%');
-		}, 50);
+		}, 1000);
 		d3.selectAll('.brush>.overlay').remove();
 
 		this.tick();
