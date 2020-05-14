@@ -141,7 +141,7 @@ export class LineChartComponent implements OnInit {
     }
     private addXandYAxis() {
         // range of data configuring
-		this.x = d3Scale.scaleTime().range([0, this.width]);
+		this.x = d3Scale.scaleTime() .range([0, this.width]);
 
 		this.x2 = d3Scale.scaleTime().range([0, this.width]);
 
@@ -388,9 +388,13 @@ export class LineChartComponent implements OnInit {
 
 	private autoBrush() {
 		const s = this.selectedBrush;
-		this.x.domain(s.map(this.x2.invert, this.x2));
-		this.brushTime.emit(s.map(this.x2.invert, this.x2));
-		console.log(s.map(this.x2.invert, this.x2));
+		const mappedSelection = s.map(this.x2.invert, this.x2);
+		if ( (new Date(mappedSelection[0]).valueOf() ) === 946743800000 ) {
+			return;
+		}
+		this.x.domain(mappedSelection);
+		this.brushTime.emit(mappedSelection);
+		console.log(mappedSelection);
 		this.updateFocusXAxis();
 		this.svg.select('.zoom').call(this.zoom.transform, d3Zoom.zoomIdentity
 				.scale((this.width) / (s[1] - s[0]))
@@ -437,7 +441,7 @@ export class LineChartComponent implements OnInit {
 		  .call(this.yAxis2);
 
 		// Update x axis
-		this.updateFocusXAxis();
+		// this.updateFocusXAxis();
 
 		// Update y axis
 		this.focus.select('.axis.axis--y')
