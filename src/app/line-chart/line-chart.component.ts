@@ -93,11 +93,12 @@ export class LineChartComponent implements OnInit {
 		if (this.isLive) {
 			this.tick();
 		}
-	}, 20000);
+	}, 10000);
   }
 
   setdata(starttime, endtime, labels, datapoints, brushstarttime, brushendtime) {
 	this.data.push(...datapoints);
+	this.data.shift();
 	this.masterData.dataPoints.push(...datapoints);
 	this.labels = labels;
 	this.starttime = starttime;
@@ -113,7 +114,7 @@ export class LineChartComponent implements OnInit {
 	   d3.select('.svg1-con').append('svg').attr('width', '1000').attr('height', '150').attr('class', 'svg1');
     this.buildSvg();
     this.addXandYAxis();
-    this.drawLineAndPath();
+	this.drawLineAndPath();
   }
 
   // This method is called when user selects time from the dropdown
@@ -165,7 +166,7 @@ export class LineChartComponent implements OnInit {
 		.on('brush end', null);
 
 		this.brush = d3Brush.brushX()
-			.extent([[0, 0], [this.width, this.height]])
+			.extent([[5, 0], [this.width, this.height]])
 			.on('brush end', this.brushed.bind(this));
 
 
@@ -379,24 +380,27 @@ export class LineChartComponent implements OnInit {
 
 	}
 
+
+	private updateFocusXAxis() {
+		this.focus.select('.area').attr('d', this.area);
+		this.focus.select('.axis--x').call(this.xAxis);
+	}
+
 	private autoBrush() {
-	 const s = this.selectedBrush;
-	 this.x.domain(s.map(this.x2.invert, this.x2));
-	 this.brushTime.emit(s.map(this.x2.invert, this.x2));
-	 console.log(s.map(this.x2.invert, this.x2));
-	 this.focus.select('.area').attr('d', this.area);
-	 this.focus.select('.axis--x').call(this.xAxis);
-	 this.svg.select('.zoom').call(this.zoom.transform, d3Zoom.zoomIdentity
-	        .scale((this.width) / (s[1] - s[0]))
-	        .translate(-s[0], 0));
+		const s = this.selectedBrush;
+		this.x.domain(s.map(this.x2.invert, this.x2));
+		this.brushTime.emit(s.map(this.x2.invert, this.x2));
+		console.log(s.map(this.x2.invert, this.x2));
+		this.updateFocusXAxis();
+		this.svg.select('.zoom').call(this.zoom.transform, d3Zoom.zoomIdentity
+				.scale((this.width) / (s[1] - s[0]))
+				.translate(-s[0], 0));
 	}
 
 	// This method tick the data flow in the chart. It uses 3000ms duration to move the chart.
 	private tick() {
 
-		if (this.data.length === 0) {
-			return;
-		}
+		if (this.data.length === 0) return;
 
 		const xminMax = d3Array.extent(this.data, (d: any) => new Date(d.time));
 		const yMinMax = d3Array.extent(this.data, (d: any) => d.dataArray[this.selected]);
@@ -432,6 +436,10 @@ export class LineChartComponent implements OnInit {
 		  .duration(duration)
 		  .call(this.yAxis2);
 
+		// Update x axis
+		this.updateFocusXAxis();
+
+		// Update y axis
 		this.focus.select('.axis.axis--y')
 		  .transition()
 		  .duration(duration)
@@ -471,17 +479,13 @@ export class LineChartComponent implements OnInit {
 		  .ease(D3.easeLinear)
 		  .on('end', () => {
 
-		if (!this.isPlaying) {
-			this.autoBrush();
-			return;
-		}
 		this.autoBrush();
 
+		if (!this.isPlaying) {
+			return;
+		}
+
 		});
-
-		// Remove first point
-		this.data.shift();
-
 	  }
 
 	  moveBrush() {
@@ -512,14 +516,14 @@ export class LineChartComponent implements OnInit {
 
     // This method is called when play or pause button is clicked
 	  onPlayPause(event) {
-      this.isPlaying = !this.isPlaying;
-      this.isLive = false;
-	  this.svg1.style('fill', '#33333342');
-	  d3.selectAll('.last-circle').style('fill', '#ff000000');
-	  d3.selectAll('.outer-circle').style('fill', '#ff000000');
-      if (this.isPlaying) {
-        this.moveBrush();
-      }
+		this.isPlaying = !this.isPlaying;
+		this.isLive = false;
+		this.svg1.style('fill', '#33333342');
+		d3.selectAll('.last-circle').style('fill', '#ff000000');
+		d3.selectAll('.outer-circle').style('fill', '#ff000000');
+		if (this.isPlaying) {
+			this.moveBrush();
+		}
       }
 
 }
