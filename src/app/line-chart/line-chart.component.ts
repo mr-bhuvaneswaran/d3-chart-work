@@ -219,7 +219,7 @@ export class LineChartComponent implements OnInit {
 		   const s = d3.event.selection || this.x2.range();
 		   this.selectedBrush = s;
 		   if (this.handle) {
-			this.handle.attr('display', null).attr('transform', (d, i) => 'translate(' + [ s[i] - 4 , 5] + ')');
+			this.handle.attr('display', null).attr('transform', (d, i) => 'translate(' + [ i ? s[i] : s[i] - 4, 5] + ')');
 		   }
 			this.x.domain(s.map(this.x2.invert, this.x2));
 			this.brushTime.emit(s.map(this.x2.invert, this.x2));
@@ -244,9 +244,9 @@ export class LineChartComponent implements OnInit {
 
 		const brushResizePath = (d) => {
 			return d.type === 'e' ?
-			"M 3 2 L 4 2 L 4 36.5 C 5.933 36.5 7.5 38.067 7.5 40 L 7.5 58 C 7.5 59.933 5.933 61.5 4 61.5 L 4 61.5 L 4 61.5 L 4 97.641 L 3 97.641 L 3 2 Z"
+			"M 0.9 34.677 V 0 H 0 V 96 H 0.9 V 59.681 a 4.01 4.01 0 0 0 3.589 -3.975 V 38.66 A 3.993 3.993 0 0 0 0.9 34.677 Z m 1.92 15.36 H 1.211 v -0.9 H 2.817 Z m 0 -2.252 H 1.211 v -0.9 H 2.817 Z m 0 -2.243 H 1.211 v -0.9 H 2.817 Z"
 			:
-			"M 3.5 0 L 4.5 0 L 4.5 95.641 L 3.5 95.641 L 3.5 59.5 C 1.567 59.5 2.36724e-16 57.933 0 56 L 0 38 C -2.36724e-16 36.067 1.567 34.5 3.5 34.5 L 3.5 34.5 L 3.5 34.5 L 3.5 0 Z";
+			"M 3.589 34.677 V 0 h 0.9 V 96 h -0.9 V 59.681 A 4.01 4.01 0 0 1 0 55.707 V 38.66 A 3.993 3.993 0 0 1 3.589 34.677 Z m -1.92 15.36 H 3.275 v -0.9 H 1.669 Z m 0 -2.252 H 3.275 v -0.9 H 1.669 Z m 0 -2.243 H 3.275 v -0.9 H 1.669 Z";
 		}
 
 		this.focus.append('path')
@@ -293,7 +293,7 @@ export class LineChartComponent implements OnInit {
 			  .attr('cursor', 'ew-resize')
 			  .attr('d', brushResizePath);
 		
-		focusHandle.attr('transform', (d , i) => 'translate(' + [ i ? this.width - 5 : 0  , 5] + ')');
+		focusHandle.attr('transform', (d , i) => 'translate(' + [ i ? this.width : 0  , 5] + ')');
 
 		focusBrush.call(this.brush1.move, [this.x.range()[0] + 5, this.x.range()[1]])
 			.selectAll('.handle').style('pointer-events', 'none');
