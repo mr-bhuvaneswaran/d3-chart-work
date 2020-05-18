@@ -162,11 +162,11 @@ export class LineChartComponent implements OnInit {
 		this.yAxis2 = d3Axis.axisLeft(this.y2);
 
 		this.brush1 = d3Brush.brushX()
-		.extent([[10, 0], [this.width, this.height]])
+		.extent([[10, 10], [this.width, this.height]])
 		.on('brush end', null);
 
 		this.brush = d3Brush.brushX()
-			.extent([[5, 0], [this.width, this.height]])
+			.extent([[5, 10], [this.width, this.height]])
 			.on('brush end', this.brushed.bind(this));
 
 
@@ -219,7 +219,7 @@ export class LineChartComponent implements OnInit {
 		   const s = d3.event.selection || this.x2.range();
 		   this.selectedBrush = s;
 		   if (this.handle) {
-			this.handle.attr('display', null).attr('transform', (d, i) => 'translate(' + [ i ? s[i] : s[i] - 4, 5] + ')');
+			this.handle.attr('display', null).attr('transform', (d, i) => 'translate(' + [ i ? s[i] : s[i] - 4, 10] + ')');
 		   }
 			this.x.domain(s.map(this.x2.invert, this.x2));
 			this.brushTime.emit(s.map(this.x2.invert, this.x2));
@@ -293,7 +293,7 @@ export class LineChartComponent implements OnInit {
 			  .attr('cursor', 'ew-resize')
 			  .attr('d', brushResizePath);
 		
-		focusHandle.attr('transform', (d , i) => 'translate(' + [ i ? this.width : 0  , 5] + ')');
+		focusHandle.attr('transform', (d , i) => 'translate(' + [ i ? this.width : 0  , 10] + ')');
 
 		focusBrush.call(this.brush1.move, [this.x.range()[0] + 5, this.x.range()[1]])
 			.selectAll('.handle').style('pointer-events', 'none');
